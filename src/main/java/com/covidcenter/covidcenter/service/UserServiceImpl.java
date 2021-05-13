@@ -15,12 +15,11 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public List<user> fetchAll() {
-        return null;
+        return userRepo.fetchAll();
     }
 
     @Override
-    public User addUser(user u) {
-        userRepo.addUser(u);
-        return null;
+    public int addUser(user u) {
+        return userRepo.addUser(u);
     }
 }

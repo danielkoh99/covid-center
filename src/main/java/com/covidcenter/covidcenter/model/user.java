@@ -1,17 +1,19 @@
 package com.covidcenter.covidcenter.model;
 
+import com.covidcenter.covidcenter.enums.userTypeCode;
+
 public class user {
     int idUser;
     String cprNumber;
     String name;
     String surname;
     int Age;
-    userType userType;
+    userType userType=new userType(userTypeCode.user);
     String email;
     String loginTime;
     String password;
     String token;
-
+    public user(){}
     public String getName() {
         return name;
     }

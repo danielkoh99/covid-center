@@ -23,9 +23,9 @@ public class UserRepoImpl implements IUserRepo{
     }
 
     @Override
-    public User addUser(user u) {
+    public int addUser(user u) {
         String sql ="INSERT INTO user(cpr_number,name,surname,age,email,password, token, loginTime,userTypeId) VALUES(?,?,?,?,?,?,?,?,?)";
-        template.update(sql,u.getCprNumber(),u.getName(),u.getSurname(),u.getAge(),u.getEmail(),u.getPassword(),u.getToken(),u.getLoginTime(),u.getUserType().getType().getCode());
-        return null;
+        return template.update(sql,u.getCprNumber(),u.getName(),u.getSurname(),u.getAge(),u.getEmail(),u.getPassword(),u.getToken(),u.getLoginTime(),u.getUserType().getType().getCode());
+
     }
 }

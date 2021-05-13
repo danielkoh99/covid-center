@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface IUserService {
     List<user> fetchAll();
-    User addUser(user u);
+    int addUser(user u);
 }
