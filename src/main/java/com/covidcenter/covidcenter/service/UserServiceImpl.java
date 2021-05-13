@@ -2,7 +2,6 @@ package com.covidcenter.covidcenter.service;
 
 import com.covidcenter.covidcenter.model.user;
 import com.covidcenter.covidcenter.repository.IUserRepo;
-import org.apache.tomcat.jni.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
