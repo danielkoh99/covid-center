@@ -2,12 +2,17 @@ package com.covidcenter.covidcenter.model;
 
 import com.covidcenter.covidcenter.enums.userTypeCode;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+
 public class user {
     int idUser;
     String cprNumber;
     String name;
     String surname;
     int Age;
+    @SuppressWarnings("JpaAttributeTypeInspection")
     userType userType=new userType(userTypeCode.user);
     String email;
     String loginTime;
