@@ -15,8 +15,6 @@ public class HomeController {
     IUserService userService;
 @GetMapping("/")
     public String Home(Model model){
-    user testuser= new user(1,"45672345","George","Brown",34,new userType(userTypeCode.user),"george","12","hhh","");
-    userService.addUser(testuser);
     return "Index";
     }
 

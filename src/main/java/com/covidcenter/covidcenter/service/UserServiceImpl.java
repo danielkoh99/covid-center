@@ -21,4 +21,29 @@ public class UserServiceImpl implements IUserService {
     public int addUser(user u) {
         return userRepo.addUser(u);
     }
+
+    @Override
+    public int updateUser(user u) { return userRepo.updateUser(u); }
+
+    @Override
+    public user getUser(int userID) {
+        return userRepo.getUser(userID);
+    }
+
+    @Override
+    public user getUser(String email) {
+        return userRepo.getUser(email);
+    }
+
+    @Override
+    public String login(int userID) throws Exception {
+        return userRepo.login(userID);
+    }
+
+    @Override
+    public Boolean logout(int userID) {
+        return userRepo.logout(userID);
+    }
+
+
 }
