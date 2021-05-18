@@ -1,16 +1,16 @@
 package com.covidcenter.covidcenter.model;
 
-import com.covidcenter.covidcenter.enums.bookingStatusCode;
+import com.covidcenter.covidcenter.enums.BookingStatusCode;
 
-public class bookingStatus {
+public class BookingStatus {
     int idbookingStatus;
-    bookingStatusCode bookingStatus;
+    BookingStatusCode bookingStatus;
 
-    public bookingStatus(){
+    public BookingStatus() {
 
     }
 
-    public bookingStatus(int idbookingStatus, bookingStatusCode bookingStatus) {
+    public BookingStatus(int idbookingStatus, BookingStatusCode bookingStatus) {
         this.idbookingStatus = idbookingStatus;
         this.bookingStatus = bookingStatus;
     }
@@ -23,13 +23,12 @@ public class bookingStatus {
         this.idbookingStatus = id;
     }
 
-    public bookingStatusCode getStatus() {
+    public BookingStatusCode getStatus() {
         return bookingStatus;
     }
 
-    public void setStatus(bookingStatusCode bookingStatus) {
+    public void setStatus(BookingStatusCode bookingStatus) {
         this.bookingStatus = bookingStatus;
     }
-
 
 }
