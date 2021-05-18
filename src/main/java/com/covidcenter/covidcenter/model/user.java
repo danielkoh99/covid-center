@@ -1,10 +1,6 @@
 package com.covidcenter.covidcenter.model;
 
 import com.covidcenter.covidcenter.enums.UserTypeCode;
-import com.sun.xml.txw2.IllegalSignatureException;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
