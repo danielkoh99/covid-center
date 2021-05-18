@@ -1,4 +1,4 @@
 package com.covidcenter.covidcenter.model;
 
-public class booking {
+public class Booking {
 }

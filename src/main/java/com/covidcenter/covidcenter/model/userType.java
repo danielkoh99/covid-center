@@ -1,20 +1,18 @@
 package com.covidcenter.covidcenter.model;
 
-import com.covidcenter.covidcenter.enums.userTypeCode;
+import com.covidcenter.covidcenter.enums.UserTypeCode;
 
-public class userType {
-    userTypeCode Type;
+public class UserType {
+    UserTypeCode type;
     int idUserType;
 
-    public userTypeCode getType() {
-        return Type;
+    public UserTypeCode getType() {
+        return type;
     }
 
-    public userType(userTypeCode type) {
-        idUserType=type.getCode();
-        Type = type;
+    public UserType(UserTypeCode type) {
+        idUserType = type.getCode();
+        this.type = type;
     }
 
 }
-
-

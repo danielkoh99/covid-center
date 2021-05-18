@@ -1,6 +1,6 @@
 package com.covidcenter.covidcenter.repository;
 
-import com.covidcenter.covidcenter.model.user;
+import com.covidcenter.covidcenter.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,55 +17,58 @@ public class UserRepoImpl implements IUserRepo {
     JdbcTemplate template;
 
     @Override
-    public List<user> fetchAll() {
+    public List<User> fetchAll() {
         String sql = "SELECT * FROM user";
-        RowMapper<user> rowMapper = new BeanPropertyRowMapper<>(user.class);
+        RowMapper<User> rowMapper = new BeanPropertyRowMapper<>(User.class);
         return template.query(sql, rowMapper);
     }
 
     @Override
-    public int addUser(user u) {
+    public int addUser(User u) {
         String sql = "INSERT INTO user(cpr_number,name,surname,email,password, token, loginTime,userTypeId) VALUES(?,?,?,?,?,?,?,?)";
-        return template.update(sql, u.getCprNumber(), u.getName(), u.getSurname(), u.getEmail(),
-                u.getHashedPassword(), u.getToken(), u.getLoginTime(), u.getUserType().getType().getCode());
+        return template.update(sql, u.getCprNumber(), u.getName(), u.getSurname(), u.getEmail(), u.getHashedPassword(),
+                u.getToken(), u.getLoginTime(), u.getUserType().getType().getCode());
 
-    }
-    @Override
-    public int updateUser(user u){
-        String sql="UPDATE user SET cpr_number= ?,name = ?, surname = ?, email = ? WHERE (id_user = ?);";
-        return template.update(sql,u.getCprNumber(), u.getName(), u.getSurname(), u.getEmail(),u.getIdUser() );
     }
 
     @Override
-    public user getUser(int userID) {
-        String sql="SELECT * FROM user WHERE (id_user=?) LIMIT 1";
-        return template.queryForObject(sql, new BeanPropertyRowMapper<>(user.class),userID);
+    public int updateUser(User u) {
+        String sql = "UPDATE user SET cpr_number= ?,name = ?, surname = ?, email = ? WHERE (id_user = ?);";
+        return template.update(sql, u.getCprNumber(), u.getName(), u.getSurname(), u.getEmail(), u.getIdUser());
     }
 
     @Override
-    public user getUser(String email) {
-        String sql="SELECT * FROM user WHERE (email=?) LIMIT 1";
-        return template.queryForObject(sql, new BeanPropertyRowMapper<>(user.class),email);
+    public User getUser(int userID) {
+        String sql = "SELECT * FROM user WHERE (id_user=?) LIMIT 1";
+        return template.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), userID);
+    }
+
+    @Override
+    public User getUser(String email) {
+        String sql = "SELECT * FROM user WHERE (email=?) LIMIT 1";
+        return template.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), email);
 
     }
 
     @Override
     public String login(int userID) throws Exception {
-        String sql="UPDATE user SET token=?, loginTime=? WHERE (id_user=?);";
-        UUID token= UUID.randomUUID();
-        int result=template.update(sql, token.toString(), LocalDateTime.now().toString(),userID);
-        if (result>0) {
+        String sql = "UPDATE user SET token=?, loginTime=? WHERE (id_user=?);";
+        UUID token = UUID.randomUUID();
+        int result = template.update(sql, token.toString(), LocalDateTime.now().toString(), userID);
+        if (result > 0) {
             return token.toString();
-        } throw new Exception("Login failed");
+        }
+        throw new Exception("Login failed");
     }
 
     @Override
     public Boolean logout(int userID) {
-        String sql="UPDATE user SET token=?, loginTime=? WHERE (id_user=?);";
+        String sql = "UPDATE user SET token=?, loginTime=? WHERE (id_user=?);";
 
-        int result=template.update(sql, "", "",userID);
-        if (result>0) {
+        int result = template.update(sql, "", "", userID);
+        if (result > 0) {
             return true;
-        } return false;
+        }
+        return false;
     }
 }
