@@ -23,7 +23,7 @@
             <h3>Sign In</h3>
           </div>
           <!-- Login Form -->
-          <form>
+          <form id="loginForm">
             <div class="form-floating fadeIn second">
                 <input type="email" class="form-control " id="floatingInput" placeholder="name@example.com">
                 <label for="floatingInput">Email Address</label>
@@ -43,4 +43,60 @@
         </div>
       </div>
 </body>
+
+<script>
+    (function() {
+        // your page initialization code here
+        // the DOM will be available here
+        console.log("docuemnt ready")
+        var userid=getCookie("userID");
+        console.log(userid)
+        if(userid>0){
+            window.location.replace("/logged");
+        }
+    })();
+
+    document.querySelector("#loginForm").addEventListener("submit", function(e){
+            e.preventDefault();    //stop form from submitting
+        console.log("We are here")
+        var email = document.getElementById("floatingInput").value;
+        var password = document.getElementById("floatingPassword").value;
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "api/user/login", true);
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+
+                // Response
+                var response = this.responseText;
+                var cookies =JSON.parse(response);
+
+                document.cookie = "userID="+cookies.idUser;
+                document.cookie = "username="+cookies.name;
+                document.cookie = "token="+cookies.token;
+                document.cookie = "loginTime="+cookies.loginTime;
+                document.cookie = "userType="+cookies.userType.type;
+                window.location.replace("/logged");
+            }
+        };
+        var data={"password":password,"email":email};
+        xhttp.send(JSON.stringify(data));
+
+    });
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+</script>
 </html>
