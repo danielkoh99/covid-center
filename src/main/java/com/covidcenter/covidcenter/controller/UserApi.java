@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
-@RestController("/api")
+@RestController("/api/user")
 public class UserApi {
-    final String APIPATH = "api/user";
+    final String APIPATH = "/api/user";
     @Autowired
     IUserService userService;
 
