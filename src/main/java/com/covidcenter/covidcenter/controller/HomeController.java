@@ -16,5 +16,10 @@ public class HomeController {
         return "Index";
     }
 
+    @GetMapping("/logged")
+    public String LoggedIn() {
+        return "admin";
+    }
+
 
 }
