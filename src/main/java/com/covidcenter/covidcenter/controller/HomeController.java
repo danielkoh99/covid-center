@@ -16,7 +16,7 @@ public class HomeController {
         return "Index";
     }
 
-    @GetMapping("/logged")
+    @GetMapping("/admin")
     public String LoggedIn() {
         return "admin";
     }

@@ -12,8 +12,8 @@
     />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="./css/reset.css">
-  <link rel="stylesheet" href="./css/signin.css">
+  <link rel="stylesheet" href="../static/reset.css">
+  <link rel="stylesheet" href="../static/signin.css">
 </head>
 <body>
     <div class="wrapper fadeInDown">
@@ -45,14 +45,15 @@
 </body>
 
 <script>
+    //check if the users cookie exist in the browser
     (function() {
         // your page initialization code here
         // the DOM will be available here
         console.log("docuemnt ready")
-        var userid=getCookie("userID");
+        const userid=getCookie("userID");
         console.log(userid)
         if(userid>0){
-            window.location.replace("/logged");
+            window.location.replace("/admin");
         }
     })();
 
@@ -70,13 +71,14 @@
                 // Response
                 var response = this.responseText;
                 var cookies =JSON.parse(response);
+                console.log(cookies);
 
                 document.cookie = "userID="+cookies.idUser;
                 document.cookie = "username="+cookies.name;
                 document.cookie = "token="+cookies.token;
                 document.cookie = "loginTime="+cookies.loginTime;
                 document.cookie = "userType="+cookies.userType.type;
-                window.location.replace("/logged");
+                window.location.replace("/admin");
             }
         };
         var data={"password":password,"email":email};

@@ -61,6 +61,7 @@ public class UserApi {
     }
 
     @PostMapping(APIPATH + "/login")
+    //for testing purposes email= email@email.com password: test123
     public ResponseEntity<?> Login(@RequestBody String u) {
         Gson gson = new Gson();
         ArrayList<ValidationError> validationErrors = new ArrayList<>();
