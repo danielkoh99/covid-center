@@ -56,6 +56,11 @@ body {
     text-align: center;
 }
 
+.table {
+    border-radius: 5px;
+    overflow: hidden;
+}
+
 /*chidren subpage css*/
 .fa-arrow-circle-left {
     font-size: 40px;
@@ -67,7 +72,7 @@ body {
 }
 
 .table_wrapper {
-    padding-top: 75px;
+    padding-top: 10px;
     width: 75%;
     margin: 0 auto;
 }
@@ -107,32 +112,23 @@ table tr td i:last-child {
     color: var(--blue) !important;
 }
 
-/* Style the search field */
-form.example input[type=text] {
-    padding: 10px;
-    font-size: 17px;
-    border: 1px solid grey;
-    float: left;
-    width: 80%;
-    background: #f1f1f1;
+.d-flex {
+    margin-top: 100px;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* Style the submit button */
-form.example button {
-    float: left;
-    width: 20%;
-    padding: 10px;
-    background: #2196F3;
-    color: white;
-    font-size: 17px;
-    border: 1px solid grey;
-    border-left: none; /* Prevent double borders */
-    cursor: pointer;
+.btn-outline-success {
+    background-color: #0088a9;
+    color: #ffffff;
 }
 
-form.example button:hover {
-    background: #0b7dda;
+.btn-outline-success:hover {
+    background-color: #ffffff;
+    color: #0088a9;
 }
+
 
 /* Clear floats */
 form.example::after {
