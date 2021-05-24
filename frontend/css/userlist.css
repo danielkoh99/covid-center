@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
 html,
 body {
     min-height: 100vh;
     width: 100vw;
-    font-family: "Oswald", sans-serif;
+    font-family: "Montserrat", sans-serif;
     background-color: #24252A;
     display: flex;
     flex-direction: column;
