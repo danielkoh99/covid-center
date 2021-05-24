@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
-@CrossOrigin(origins = "http://127.0.0.1:5500")
+@CrossOrigin(origins = "*")
 @RestController("/api/user")
 public class UserApi {
     final String APIPATH = "/api/user";
@@ -25,7 +25,7 @@ public class UserApi {
     IUserService userService;
 
     @GetMapping(APIPATH)
-    public String Home(Model model) {
+    public String Home() {
         // user testuser= new user(1,"45672345","George","Brown",34,new
         // userType(userTypeCode.user),"george","12","hhh","");
         Gson gson = new Gson();
@@ -69,7 +69,7 @@ public class UserApi {
         ArrayList<ValidationError> validationErrors = new ArrayList<>();
         try {
             User user = gson.fromJson(u, User.class);
-            user.setUserType(new UserType(UserTypeCode.user));
+//            user.setUserType(new UserType(UserTypeCode.user));
             // u= new user(1,"45672345","George","Brown",34,new
             // userType(userTypeCode.user),"george","12","hhh","");
 
@@ -80,6 +80,7 @@ public class UserApi {
                 String loginToken = userService.login(userR.getIdUser()); // returns String token
                 userR.setToken(loginToken);
                 userR.setPassword("");
+                System.out.println(userR.getUserType().getType());
                 return new ResponseEntity<>(gson.toJson(userR), HttpStatus.OK);
 
             } else {

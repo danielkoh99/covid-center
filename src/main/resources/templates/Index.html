@@ -43,39 +43,7 @@
         </div>
       </div>
     <script src="../static/js/auth.js"></script>
-    <script>
-
-
-        document.querySelector("#loginForm").addEventListener("submit", function(e){
-            e.preventDefault();    //stop form from submitting
-            console.log("We are here")
-            var email = document.getElementById("floatingInput").value;
-            var password = document.getElementById("floatingPassword").value;
-
-            var xhttp = new XMLHttpRequest();
-            xhttp.open("POST", "api/user/login", true);
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-
-                    // Response
-                    var response = this.responseText;
-                    var cookies =JSON.parse(response);
-                    console.log(cookies);
-
-                    document.cookie = "userID="+cookies.idUser;
-                    document.cookie = "username="+cookies.name;
-                    document.cookie = "token="+cookies.token;
-                    document.cookie = "loginTime="+cookies.loginTime;
-                    document.cookie = "userType="+cookies.userType.type;
-                    window.location.replace("/admin");
-                }
-            };
-            var data={"password":password,"email":email};
-            xhttp.send(JSON.stringify(data));
-
-        });
-
-    </script>
+    <script src="../static/js/login.js"></script>
 </body>
 
 </html>

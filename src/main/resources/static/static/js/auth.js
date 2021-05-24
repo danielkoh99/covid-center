@@ -23,9 +23,11 @@ function getCookie(cname) {
     const userid=getCookie("userID");
     console.log(userid)
     if(userid>0){
+        //this prevents server from endless loading of the page
         if(window.location.href === "http://localhost:5555/") window.location.replace("/admin");
         else return;
     }else {
+        //this prevents server from endless loading of the page
         if(window.location.href === "http://localhost:5555/") return;
         else window.location.replace("/");
     }

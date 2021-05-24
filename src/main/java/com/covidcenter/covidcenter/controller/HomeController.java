@@ -24,18 +24,25 @@ public class HomeController {
     IBookingService bookingService;
 
     @GetMapping("/")
-    public String Home() {
+    public String home() {
         bookingService.createBooking(1,new Booking(1,"d","f", new BookingStatus(BookingStatusCode.pending),new BookingType(BookingTypeCode.test),1));
 
         return "Index";
     }
 
     @GetMapping("/admin")
-    public String LoggedIn() {
-        System.out.println("hey");
-
+    public String admin() {
         return "admin";
     }
 
+    @GetMapping("/user")
+    public String user() {
+        return "user";
+    }
+
+    @GetMapping("/secretary")
+    public String secretary() {
+        return "secretary";
+    }
 
 }
