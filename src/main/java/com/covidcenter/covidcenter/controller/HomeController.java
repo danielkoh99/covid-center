@@ -32,6 +32,8 @@ public class HomeController {
 
     @GetMapping("/admin")
     public String LoggedIn() {
+        System.out.println("hey");
+
         return "admin";
     }
 

@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin</title>
-    <link rel="stylesheet" href="./static/admin.css">
+    <link rel="stylesheet" href="../static/css/reset.css">
+    <link rel="stylesheet" href="../static/css/admin.css">
 </head>
 <body>
 <header>
-    <img class="logo" src="./static/logo.png">
+    <img class="logo" src="./static/assets/logo.png">
     <nav>
         <ul class="nav_links">
             <li><a href="#">Welcome, <span id="userNamePlaceholder">name</span></a></li>
@@ -26,38 +27,13 @@
 <footer>
     <a>Copyright ©<script>document.write(new Date().getFullYear());</script> | All rights reserved | Powered by B.B.H(Simon, Vlad, Andrei & Daniel)  </a>
 </footer>
+<script src="../static/js/auth.js"></script>
 
-</body>
 <script>
-    (function() {
-        // your page initialization code here
-        // the DOM will be available here
-        console.log("docuemnt ready")
-        var userid=getCookie("userID");
-        console.log(userid)
-        if(!userid>0){
-            window.location.replace("/");
-        }
-    })();
+
     var username = document.getElementById("userNamePlaceholder");
-
-    function getCookie(cname) {
-        var name = cname + "=";
-        var decodedCookie = decodeURIComponent(document.cookie);
-        var ca = decodedCookie.split(';');
-        for(var i = 0; i <ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == ' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) == 0) {
-                return c.substring(name.length, c.length);
-            }
-        }
-        return "";
-    }
-
     username.textContent=getCookie("username");
+
     document.getElementById("logoutButton").addEventListener("click", ()=>{
         var xhttp = new XMLHttpRequest();
         xhttp.open("POST", "api/user/logout", true);
@@ -66,6 +42,10 @@
 
                 // Response
                 document.cookie = "userID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                document.cookie = "userType=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                document.cookie = "loginTime=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
                 window.location.replace("/");
             }
         };
@@ -74,4 +54,6 @@
     });
 
 </script>
+</body>
+
 </html>

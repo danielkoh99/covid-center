@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController("/api/user")
 public class UserApi {
     final String APIPATH = "/api/user";
@@ -60,6 +61,7 @@ public class UserApi {
 
     }
 
+
     @PostMapping(APIPATH + "/login")
     //for testing purposes email= email@email.com password: test123
     public ResponseEntity<?> Login(@RequestBody String u) {
@@ -82,7 +84,6 @@ public class UserApi {
 
             } else {
                 return new ResponseEntity<>("Incorrect email or password", HttpStatus.NOT_FOUND);
-
             }
         } catch (Exception e) {
             e.printStackTrace();
