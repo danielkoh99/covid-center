@@ -80,7 +80,6 @@ public class UserApi {
                 String loginToken = userService.login(userR.getIdUser()); // returns String token
                 userR.setToken(loginToken);
                 userR.setPassword("");
-                System.out.println(userR.getUserType().getType());
                 return new ResponseEntity<>(gson.toJson(userR), HttpStatus.OK);
 
             } else {

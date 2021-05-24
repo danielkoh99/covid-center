@@ -1,12 +1,18 @@
 package com.covidcenter.covidcenter.repository;
 
+import com.covidcenter.covidcenter.enums.UserTypeCode;
 import com.covidcenter.covidcenter.model.User;
+import com.covidcenter.covidcenter.model.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -46,8 +52,24 @@ public class UserRepoImpl implements IUserRepo {
     @Override
     public User getUser(String email) {
         String sql = "SELECT * FROM user WHERE (email=?) LIMIT 1";
-        return template.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), email);
-
+        User user = template.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), email);
+        sql = "SELECT userTypeId FROM user WHERE email='"+email+"' LIMIT 1";
+        ResultSetExtractor<Integer> integerResultSetExtractor = new ResultSetExtractor<Integer>() {
+            @Override
+            public Integer extractData(ResultSet rs) throws SQLException, DataAccessException {
+                return rs.findColumn("userTypeId");
+            }
+        };
+        int type = template.query(sql,integerResultSetExtractor);
+        switch (type){
+            case 1: user.setUserType(new UserType(UserTypeCode.administrator));
+                    break;
+            case 2: user.setUserType(new UserType(UserTypeCode.secretary));
+                    break;
+            case 3: user.setUserType(new UserType(UserTypeCode.user));
+                    break;
+        }
+        return user;
     }
 
     @Override

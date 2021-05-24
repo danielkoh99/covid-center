@@ -14,7 +14,7 @@ public class User {
     String name;
     String surname;
     @SuppressWarnings("JpaAttributeTypeInspection")
-    UserType userType = new UserType(UserTypeCode.user);
+    UserType userType;
     String email;
     String loginTime;
     String password;
