@@ -8,8 +8,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script>
+       /* function checkPassowrd(form) {
+            password = form.password.value;
+            password_confirm = form.password_confirm.value;
+
+            if (password == '')
+                alert ("Please enter Password");
+            else if (password_confirm == '')
+                alert ("Please enter password confirmation");
+            else if (password != password_confirm) {
+                alert("\nPassword did not match: please try again...")
+                return false;
+            }
+        } */
+
+       function onChange() {
+           const password = document.querySelector('input[name=password]');
+           const confirm = document.querySelector('input[name=password_confirm]');
+           if (confirm.value === password.value) {
+               confirm.setCustomValidity('');
+           } else {
+               confirm.setCustomValidity('Passwords do not match');
+           }
+       }
+
+    </script>
 </head>
 <body>
+
 <div class="wrapper fadeInDown">
 <form class="form-horizontal" action='' method="POST">
     <fieldset>
@@ -17,11 +44,26 @@
             <h3>Register</h3>
         </div>
         <div class="control-group">
-            <!-- Username -->
-            <label class="control-label"  for="username">Username</label>
+            <!-- Name -->
+            <label class="control-label"  for="firstname">First name</label>
             <div class="controls">
-                <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
-                <p class="help-block">Username can contain any letters or numbers, without spaces</p>
+                <input type="text" id="firstname" name="firstname" placeholder="" class="input-xlarge">
+            </div>
+        </div>
+
+        <div class="control-group">
+        <!-- SurName -->
+        <label class="control-label"  for="surname">Surname</label>
+        <div class="controls">
+            <input type="text" id="surname" name="surname" placeholder="" class="input-xlarge">
+        </div>
+        </div>
+
+        <div class="control-group">
+            <!-- CPR -->
+            <label class="control-label"  for="cpr">Cpr no.</label>
+            <div class="controls">
+                <input type="text" id="cpr" name="cpr" placeholder="" class="input-xlarge">
             </div>
         </div>
 
@@ -47,7 +89,7 @@
             <!-- Password -->
             <label class="control-label"  for="password_confirm">Password<a style="font-size: 12px; text-decoration: none; color: #000000">(Confirm)</a></label>
             <div class="controls">
-                <input type="password" id="password_confirm" name="password_confirm" placeholder="" class="input-xlarge">
+                <input type="password" id="password_confirm" name="password_confirm" placeholder="" class="input-xlarge" onChange="onChange()">
                 <p class="help-block">Please confirm password</p>
             </div>
         </div>
@@ -55,7 +97,7 @@
         <div class="control-group" >
             <!-- Button -->
             <div class="controls" style="margin: auto">
-                <input type="submit" class="fadeIn fourth" value="Register">
+                <input onclick="checkPassowrd(form)" type="submit" class="fadeIn fourth" value="Register" onChange="onChange()">
             </div>
         </div>
     </fieldset>
