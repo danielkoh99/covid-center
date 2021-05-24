@@ -1,6 +1,7 @@
 package com.covidcenter.covidcenter.model;
 
 import com.covidcenter.covidcenter.enums.BookingStatusCode;
+import com.covidcenter.covidcenter.enums.UserTypeCode;
 
 public class BookingStatus {
     int idbookingStatus;
@@ -9,10 +10,14 @@ public class BookingStatus {
     public BookingStatus() {
 
     }
+    public BookingStatus(BookingStatusCode bookingStatus) {
 
-    public BookingStatus(int idbookingStatus, BookingStatusCode bookingStatus) {
-        this.idbookingStatus = idbookingStatus;
+        idbookingStatus=bookingStatus.getCode();
         this.bookingStatus = bookingStatus;
+    }
+    public BookingStatus(int bookingStatusCode){
+        this.bookingStatus=BookingStatusCode.getCodeByNumber(bookingStatusCode);
+        idbookingStatus=bookingStatusCode;
     }
 
     public int getId() {
