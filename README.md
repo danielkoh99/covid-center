@@ -69,3 +69,42 @@ url->api/user/logout
  OK
 
 
+## Api
+
+### Booking   url->api/booking
+
+#### readAll[get]
+#### readSingle[get] url->api/booking/ID
+#### create booking[post]
+
+######headers 
+* token bull
+* userID 1
+
+######body
+{
+* "time": "time",
+* "endTime": "endtime",
+* "bookingStatus_idbookingStatus": 1,
+* "bookingType_idbookingType": 1
+}
+  
+####delete booking[delete]
+
+######headers
+* token gigi
+* userID 1
+
+######body
+
+* {   
+* "idbookings": 5
+* }
+
+####readSingle[get] url->api/booking/ID
+
+
+######headers
+* token gigi
+* userID 1
+
