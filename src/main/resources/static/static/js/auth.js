@@ -1,4 +1,3 @@
-console.log("working");
 
 function getCookie(cname) {
     var name = cname + "=";
@@ -19,9 +18,7 @@ function getCookie(cname) {
 (function() {
     // your page initialization code here
     // the DOM will be available here
-    console.log("docuemnt ready");
     const userid=getCookie("userID");
-    console.log(userid)
     if(userid>0){
         //this prevents server from endless loading of the page
         if(window.location.href === "http://localhost:5555/") window.location.replace("/admin");

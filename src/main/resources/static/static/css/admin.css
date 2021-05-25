@@ -70,6 +70,8 @@ button:hover {
     flex-direction : row;
     justify-content : space-around;
     flex-flow : wrap;
+    margin-top: auto;
+    transform: translateY(-25%);
 }
 
 .container div {

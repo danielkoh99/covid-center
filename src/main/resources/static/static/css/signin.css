@@ -7,6 +7,7 @@ html {
 body {
   font-family: "Poppins", sans-serif;
   height: 100vh;
+  background-color: #24252A;
 }
 
 a {
@@ -151,7 +152,7 @@ input[type="text"]:focus {
   border-bottom: 2px solid #5fbae9;
 }
 
-input[type="text"]:placeholder {
+input[type="text"]::placeholder {
   color: #cccccc;
 }
 

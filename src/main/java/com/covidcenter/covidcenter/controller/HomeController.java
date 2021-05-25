@@ -30,10 +30,27 @@ public class HomeController {
         return "Index";
     }
 
+    @GetMapping("/register")
+    public String register() {
+        return "register";
+    }
+
     @GetMapping("/admin")
     public String admin() {
         return "admin";
     }
+
+    @GetMapping("/admin/create/secretary")
+    public String createSecretary() {
+        return "createSecretary";
+    }
+
+    @GetMapping("/admin/create/admin")
+    public String createAdmin() {
+        return "createAdmin";
+    }
+
+
 
     @GetMapping("/user")
     public String user() {
@@ -44,5 +61,7 @@ public class HomeController {
     public String secretary() {
         return "secretary";
     }
+
+
 
 }
