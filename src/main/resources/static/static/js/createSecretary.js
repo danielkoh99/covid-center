@@ -29,7 +29,7 @@ form.addEventListener("submit", (e) => {
     }
     //request for creating the new user
 
-    fetch("/api/user?type=3", {
+    fetch("/api/user?type=2", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -37,27 +37,8 @@ form.addEventListener("submit", (e) => {
         body: JSON.stringify(data),
     })
         .then(res => {
-            const loginData = {
-                email,
-                password
-            }
-            fetch("/api/user/login", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(loginData),
-            })
-                .then(res => res.json())
-                .then(cookies => {
-                    document.cookie = "userID="+cookies.idUser;
-                    document.cookie = "username="+cookies.name;
-                    document.cookie = "token="+cookies.token;
-                    document.cookie = "loginTime="+cookies.loginTime;
-                    document.cookie = "userType="+cookies.userType.type;
-                    window.location.replace("/user");
-                })
-                .catch(err => console.log("we are in the error block"));
+            form.reset();
+            alert("Secretary was successfully created");
         })
-        .catch(err => console.log("we are in the error block"));
+        .catch(err => console.log(err));
 });
