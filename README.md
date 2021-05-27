@@ -11,6 +11,8 @@
 #### readSingle[get] url->api/user/ID
 #### create[post]
 
+
+
 {
 * "cprNumber": "1212902020,
 * "name": "username",
@@ -68,25 +70,44 @@ url->api/user/logout
 ##### response 
  OK
 
+#### change user type[POST] url->api/user/toggleUserType
+######headers
+* token bull
+* userID 1
 
-## Api
+
+{
+
+*"idUser":1
+*"userType":1 // *"1"=administrator "2"=secretary "3"=user
+    
+}
+
+
 
 ### Booking   url->api/booking
 
 #### readAll[get]
 #### readSingle[get] url->api/booking/ID
 #### create booking[post]
+#### update booking[post]
 
+*
+*
+*
+#### create booking[post]
 ######headers 
 * token bull
 * userID 1
 
 ######body
 {
+* "idbookings":0,
 * "time": "time",
 * "endTime": "endtime",
 * "bookingStatus_idbookingStatus": 1,
-* "bookingType_idbookingType": 1
+* "bookingType_idbookingType": 1,
+* "user_id_user": 1
 }
   
 ####delete booking[delete]
@@ -107,4 +128,22 @@ url->api/user/logout
 ######headers
 * token gigi
 * userID 1
+ 
+ 
 
+#### update booking[post]
+######headers
+
+* token bull
+* userID 1
+
+######body
+{
+* "idbookings": "idbookings"
+* "time": "time",
+* "endTime": "endtime",
+* "bookingStatus_idbookingStatus": 1,
+* "bookingType_idbookingType": 1
+*  "user_id_user": "user_id_user"
+   
+  }

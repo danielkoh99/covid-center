@@ -3,6 +3,7 @@ package com.covidcenter.covidcenter.controller;
 import com.covidcenter.covidcenter.enums.UserTypeCode;
 import com.covidcenter.covidcenter.model.*;
 import com.covidcenter.covidcenter.service.IBookingService;
+import com.covidcenter.covidcenter.service.IInternalService;
 import com.covidcenter.covidcenter.service.IUserService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -20,17 +21,49 @@ public class BookingApi {
     final String APIPATH = "/api/booking";
     @Autowired
     IBookingService bookingService;
+    @Autowired
+    IInternalService internalService;
 
     @GetMapping(APIPATH)
-    public String Booking(Model model) {
+    public String Booking(Model model,@RequestHeader HttpHeaders headers) {
         Gson gson = new Gson();
-        return gson.toJson(bookingService.fetchAll());
+        try {
+            Integer user= Integer.valueOf(headers.getFirst("userID"));
+            String token=headers.getFirst("token");
+            Boolean vf= internalService.VerifyToken(user, token);
+            if (vf){
+                return gson.toJson(bookingService.fetchAll(user,""));
+            }
+            else {
+                return "logout";
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+
+            return "error";
+        }
     }
 
     @GetMapping(APIPATH+"/{id}")
-    public String Booking (@PathVariable(value = "id") String id) {
+    public String Booking (@PathVariable(value = "id") String id, @RequestHeader HttpHeaders headers) {
         Gson gson = new Gson();
-        return gson.toJson(bookingService.fetchAll(Integer.parseInt(id),""));
+        try {
+            Integer user= Integer.valueOf(headers.getFirst("userID"));
+            String token=headers.getFirst("token");
+            Boolean vf= internalService.VerifyToken(user, token);
+            if (vf){
+                return gson.toJson(bookingService.getBooking(Integer.parseInt(id)));
+            }
+            else {
+                return "logout";
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            return "error";
+        }
+
     }
     @PostMapping(APIPATH)
     public String CreateBooking (@RequestBody String body, @RequestHeader HttpHeaders headers) {
@@ -41,11 +74,18 @@ public class BookingApi {
             Booking booking = gson.fromJson(body,Booking.class);
             booking.setUser_id_user(Integer.valueOf(headers.getFirst("userID")));
             String token=headers.getFirst("token");
-            bookingService.createBooking(0,booking);
-            String tok4en=headers.getFirst("token");
+           Boolean vf= internalService.VerifyToken(booking.getUser_id_user(), token);
+            if (vf){
+                bookingService.createBooking(0,booking);
+            }
+            else {
+                return "logout";
+            }
         }
         catch (Exception e){
             System.out.println(e.getMessage());
+            return "error";
+
         }
 
         return gson.toJson(bookingService.fetchAll(Integer.valueOf(headers.getFirst("userID")),""));
@@ -58,8 +98,14 @@ public class BookingApi {
     try {
         DeleteBooking booking = gson.fromJson(body,DeleteBooking.class);
         String token=headers.getFirst("token");
-        bookingService.deleteBooking(booking.idbookings);
-        String tok4en=headers.getFirst("token");
+       Integer user= Integer.valueOf(headers.getFirst("userID"));
+        Boolean vf= internalService.VerifyToken(user, token);
+        if (vf){
+            bookingService.deleteBooking(booking.idbookings);
+        }
+        else {
+            return "logout";
+        }
     }
     catch (Exception e){
         System.out.println(e.getMessage());
@@ -77,8 +123,14 @@ public class BookingApi {
         try {
             Booking booking = gson.fromJson(body,Booking.class);
             String token=headers.getFirst("token");
-            bookingService.updateBooking(booking.getUser_id_user(), booking);
-            String tok4en=headers.getFirst("token");
+            Integer user= Integer.valueOf(headers.getFirst("userID"));
+            Boolean vf= internalService.VerifyToken(user, token);
+            if (vf){
+                bookingService.updateBooking(booking.getUser_id_user(), booking);
+            }
+            else {
+                return "logout";
+            }
         }
         catch (Exception e){
             System.out.println(e.getMessage());

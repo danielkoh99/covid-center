@@ -45,6 +45,7 @@ public class BookingRepoImpl implements IBookingRepo{
     }
     @Override
     public int createBooking(int userID, Booking booking) {
+        userID=booking.getUser_id_user();
         String sql = "INSERT INTO booking(time ,endTime,bookingStatus_idbookingStatus,bookingType_idbookingType, user_id_user) VALUES(?,?,?,?,?)";
         return template.update(sql, booking.getTime(), booking.getEndTime(), booking.getBookingStatus_idbookingStatus().getId(), booking.getBookingType_idbookingType().getIdbookingType(),booking.getUser_id_user());
     }
@@ -64,7 +65,6 @@ public class BookingRepoImpl implements IBookingRepo{
             tempBooking.setBookingStatus_idbookingStatus(new BookingStatus(sqlRowSet.getInt("bookingStatus_idbookingStatus")));
             tempBooking.setBookingType_idbookingType(new BookingType((int)sqlRowSet.getInt("bookingType_idbookingType")));
             tempBooking.setUser_id_user(Integer.valueOf(sqlRowSet.getString("user_id_user")));
-
             bookingArrayList.add(tempBooking);
         }
         RowMapper<Booking> rowMapper = new BeanPropertyRowMapper<>(Booking.class);
@@ -74,7 +74,7 @@ public class BookingRepoImpl implements IBookingRepo{
     @Override
     public int updateBooking(int userID, Booking booking) {
         String sql = "UPDATE booking SET time = ?, endTime = ?, bookingStatus_idbookingStatus = ?, bookingType_idbookingType = ?, user_id_user= ? WHERE ( idbookings = ?)";
-        return template.update(sql, booking.getTime(), booking.getEndTime(), booking.getBookingStatus_idbookingStatus().getId(), booking.getBookingType_idbookingType().getIdbookingType(),booking.getUser_id_user());
+        return template.update(sql, booking.getTime(), booking.getEndTime(), booking.getBookingStatus_idbookingStatus().getId(), booking.getBookingType_idbookingType().getIdbookingType(),booking.getUser_id_user(),booking.getIdbookings());
     }
 
     @Override
