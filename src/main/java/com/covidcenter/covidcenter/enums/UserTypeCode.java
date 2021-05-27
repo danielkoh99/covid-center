@@ -12,4 +12,21 @@ public enum UserTypeCode {
     public int getCode() {
         return code;
     }
+
+    public static UserTypeCode getCodeByNumber(int number) {
+        UserTypeCode code = null;
+        switch (number) {
+            case 1:
+                code = UserTypeCode.administrator;
+                break;
+
+            case 2:
+                code = UserTypeCode.secretary;
+                break;
+            case 3:
+                code = UserTypeCode.user;
+                break;
+        }
+        return code;
+    }
 }

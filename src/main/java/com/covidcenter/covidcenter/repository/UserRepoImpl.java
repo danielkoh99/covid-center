@@ -30,6 +30,12 @@ public class UserRepoImpl implements IUserRepo {
     }
 
     @Override
+    public int toggle(int userID, UserTypeCode type) {
+        String sql = "UPDATE user SET userTypeId= ? WHERE (id_user = ?);";
+        return template.update(sql, type.getCode(),userID);
+    }
+
+    @Override
     public int addUser(User u) {
         String sql = "INSERT INTO user(cpr_number,name,surname,email,password, token, loginTime,userTypeId) VALUES(?,?,?,?,?,?,?,?)";
         return template.update(sql, u.getCprNumber(), u.getName(), u.getSurname(), u.getEmail(), u.getHashedPassword(),
@@ -46,7 +52,26 @@ public class UserRepoImpl implements IUserRepo {
     @Override
     public User getUser(int userID) {
         String sql = "SELECT * FROM user WHERE (id_user=?) LIMIT 1";
-        return template.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), userID);
+        User user = template.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), userID);
+        sql = "SELECT userTypeId FROM user WHERE email='"+userID+"' LIMIT 1";
+        ResultSetExtractor<Integer> integerResultSetExtractor = new ResultSetExtractor<Integer>() {
+            @Override
+            public Integer extractData(ResultSet rs) throws SQLException, DataAccessException {
+                return rs.findColumn("userTypeId");
+            }
+        };
+        int type = template.query(sql,integerResultSetExtractor);
+        switch (type){
+            case 1: user.setUserType(new UserType(UserTypeCode.administrator));
+                break;
+            case 2: user.setUserType(new UserType(UserTypeCode.secretary));
+                break;
+            case 3: user.setUserType(new UserType(UserTypeCode.user));
+                break;
+        }
+        return user;
+
+
     }
 
     @Override

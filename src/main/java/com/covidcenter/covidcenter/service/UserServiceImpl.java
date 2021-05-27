@@ -1,5 +1,6 @@
 package com.covidcenter.covidcenter.service;
 
+import com.covidcenter.covidcenter.enums.UserTypeCode;
 import com.covidcenter.covidcenter.model.User;
 import com.covidcenter.covidcenter.repository.IUserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,11 @@ public class UserServiceImpl implements IUserService {
     @Override
     public List<User> fetchAll() {
         return userRepo.fetchAll();
+    }
+
+    @Override
+    public int toggle(int userID, UserTypeCode type) {
+        return userRepo.toggle(userID,type);
     }
 
     @Override

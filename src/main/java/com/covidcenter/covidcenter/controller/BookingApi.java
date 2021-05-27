@@ -68,4 +68,23 @@ public class BookingApi {
     return gson.toJson(bookingService.fetchAll(Integer.valueOf(headers.getFirst("userID")),""));
 
 }
+
+    @PutMapping(APIPATH)
+    public String UpdateBooking (@RequestBody String body, @RequestHeader HttpHeaders headers) {
+        Gson gson = new GsonBuilder().registerTypeAdapter(Booking.class, new BookingDeserializer()).create();
+
+        ArrayList<ValidationError> validationErrors = new ArrayList<>();
+        try {
+            Booking booking = gson.fromJson(body,Booking.class);
+            String token=headers.getFirst("token");
+            bookingService.updateBooking(booking.getUser_id_user(), booking);
+            String tok4en=headers.getFirst("token");
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        return gson.toJson(bookingService.fetchAll(Integer.valueOf(headers.getFirst("userID")),""));
+    }
+
 }

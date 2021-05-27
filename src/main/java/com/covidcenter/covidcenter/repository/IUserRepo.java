@@ -1,11 +1,14 @@
 package com.covidcenter.covidcenter.repository;
 
+import com.covidcenter.covidcenter.enums.UserTypeCode;
 import com.covidcenter.covidcenter.model.User;
 
 import java.util.List;
 
 public interface IUserRepo {
     List<User> fetchAll();
+
+    int toggle(int userID, UserTypeCode type);
 
     int addUser(User u);
 
@@ -18,4 +21,5 @@ public interface IUserRepo {
     String login(int userID) throws Exception;
 
     Boolean logout(int userID);
+
 }

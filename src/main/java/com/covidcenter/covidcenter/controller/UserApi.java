@@ -1,6 +1,7 @@
 package com.covidcenter.covidcenter.controller;
 
 import com.covidcenter.covidcenter.enums.UserTypeCode;
+import com.covidcenter.covidcenter.model.UserToggleBody;
 import com.covidcenter.covidcenter.model.ValidationError;
 import com.covidcenter.covidcenter.model.User;
 import com.covidcenter.covidcenter.model.UserType;
@@ -106,6 +107,22 @@ public class UserApi {
             return new ResponseEntity<>(gson.toJson(validationErrors), HttpStatus.BAD_REQUEST);
         }
     }
+    @PostMapping(APIPATH + "/toggleUserType")
+    public ResponseEntity<?> ToggleUserType(@RequestBody String u, @RequestHeader HttpHeaders headers) {
+        Gson gson = new Gson();
+        ArrayList<ValidationError> validationErrors = new ArrayList<>();
+        try {
+            UserToggleBody user = gson.fromJson(u, UserToggleBody.class);
+            userService.toggle(user.getIdUser(),UserTypeCode.getCodeByNumber(user.getUserType()));
+            return new ResponseEntity<>("",HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            validationErrors.add(new ValidationError("Exception", e.getMessage()));
+            return new ResponseEntity<>(gson.toJson(validationErrors), HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
 }
 /*
  * idUser:9 cprNumber:1234 name:tester surname:testurnem Age:12 userType:3
