@@ -9,32 +9,6 @@
     <link rel="icon" href="../../static/assets/logo.png" type="image/png" sizes="16x16">
     <meta charset="UTF-8">
     <title>Create Admin</title>
-    <script>
-        /* function checkPassowrd(form) {
-             password = form.password.value;
-             password_confirm = form.password_confirm.value;
-
-             if (password == '')
-                 alert ("Please enter Password");
-             else if (password_confirm == '')
-                 alert ("Please enter password confirmation");
-             else if (password != password_confirm) {
-                 alert("\nPassword did not match: please try again...")
-                 return false;
-             }
-         } */
-
-        function onChange() {
-            const password = document.querySelector('input[name=password]');
-            const confirm = document.querySelector('input[name=password_confirm]');
-            if (confirm.value === password.value) {
-                confirm.setCustomValidity('');
-            } else {
-                confirm.setCustomValidity('Passwords do not match');
-            }
-        }
-
-    </script>
 </head>
 <body>
 
@@ -48,7 +22,7 @@
                 <!-- Name -->
                 <label class="control-label"  for="firstname">First name</label>
                 <div class="controls">
-                    <input type="text" id="firstname" name="firstname" placeholder="" class="input-xlarge">
+                    <input type="text" id="firstname" name="firstname" placeholder="" class="input-xlarge" required>
                 </div>
             </div>
 
@@ -56,7 +30,7 @@
                 <!-- SurName -->
                 <label class="control-label"  for="surname">Surname</label>
                 <div class="controls">
-                    <input type="text" id="surname" name="surname" placeholder="" class="input-xlarge">
+                    <input type="text" id="surname" name="surname" placeholder="" class="input-xlarge" required>
                 </div>
             </div>
 
@@ -64,7 +38,7 @@
                 <!-- CPR -->
                 <label class="control-label"  for="cpr">Cpr no.</label>
                 <div class="controls">
-                    <input type="text" id="cpr" name="cpr" placeholder="" class="input-xlarge">
+                    <input type="text" id="cpr" name="cpr" placeholder="" class="input-xlarge" required>
                 </div>
             </div>
 
@@ -72,7 +46,7 @@
                 <!-- E-mail -->
                 <label class="control-label" for="email">E-mail</label>
                 <div class="controls">
-                    <input type="text" id="email" name="email" placeholder="" class="input-xlarge">
+                    <input type="text" id="email" name="email" placeholder="" class="input-xlarge" required>
                     <p class="help-block">Please provide your E-mail</p>
                 </div>
             </div>
@@ -81,7 +55,7 @@
                 <!-- Password-->
                 <label class="control-label" for="password">Password</label>
                 <div class="controls">
-                    <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
+                    <input type="password" id="password" name="password" placeholder="" class="input-xlarge" required>
                     <p class="help-block">Password should be at least 4 characters</p>
                 </div>
             </div>
@@ -90,7 +64,7 @@
                 <!-- Password -->
                 <label class="control-label"  for="password_confirm">Password<a style="font-size: 12px; text-decoration: none; color: #000000">(Confirm)</a></label>
                 <div class="controls">
-                    <input type="password" id="password_confirm" name="password_confirm" placeholder="" class="input-xlarge" onChange="onChange()">
+                    <input type="password" id="password_confirm" name="password_confirm" placeholder="" class="input-xlarge" onChange="onChange()" required>
                     <p class="help-block">Please confirm password</p>
                 </div>
             </div>
@@ -98,11 +72,13 @@
             <div class="control-group" >
                 <!-- Button -->
                 <div class="controls" style="margin: auto">
-                    <input onclick="checkPassowrd(form)" type="submit" class="fadeIn fourth" value="Create" onChange="onChange()">
+                    <input type="submit" class="fadeIn fourth" value="Create">
                 </div>
             </div>
         </fieldset>
     </form>
 </div>
+<script src="../../static/js/createAdmin.js"></script>
+
 </body>
 </html>

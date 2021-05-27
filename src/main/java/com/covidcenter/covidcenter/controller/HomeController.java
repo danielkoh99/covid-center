@@ -3,7 +3,6 @@ package com.covidcenter.covidcenter.controller;
 import com.covidcenter.covidcenter.CovidcenterApplication;
 import com.covidcenter.covidcenter.enums.BookingStatusCode;
 import com.covidcenter.covidcenter.enums.BookingTypeCode;
-import com.covidcenter.covidcenter.enums.UserTypeCode;
 import com.covidcenter.covidcenter.model.Booking;
 import com.covidcenter.covidcenter.model.BookingStatus;
 import com.covidcenter.covidcenter.model.BookingType;
@@ -26,8 +25,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String home() {
-        bookingService.createBooking(1,new Booking(1,"d","f", new BookingStatus(BookingStatusCode.pending),new BookingType(BookingTypeCode.test),1));
-        userService.toggle(62, UserTypeCode.administrator);
         return "Index";
     }
 
@@ -50,7 +47,6 @@ public class HomeController {
     public String createAdmin() {
         return "createAdmin";
     }
-
 
 
     @GetMapping("/user")

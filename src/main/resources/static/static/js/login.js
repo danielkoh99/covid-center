@@ -2,7 +2,6 @@
 
 document.querySelector("#loginForm").addEventListener("submit", function(e){
     e.preventDefault();    //stop form from submitting
-    console.log("We are here")
     var email = document.getElementById("floatingInput").value;
     var password = document.getElementById("floatingPassword").value;
 
