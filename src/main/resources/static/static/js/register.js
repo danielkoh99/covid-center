@@ -27,7 +27,6 @@ form.addEventListener("submit", (e) => {
         email,
         password
     }
-    console.log(data);
     //request for creating the new user
 
     fetch("/api/user", {

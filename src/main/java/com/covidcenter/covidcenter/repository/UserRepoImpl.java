@@ -53,22 +53,8 @@ public class UserRepoImpl implements IUserRepo {
     public User getUser(String email) {
         String sql = "SELECT * FROM user WHERE (email=?) LIMIT 1";
         User user = template.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), email);
-
-//        sql = "SELECT userTypeId FROM user WHERE email='"+email+"' LIMIT 1";
-//        System.out.println(sql);
-//        ResultSetExtractor<Integer> integerResultSetExtractor = new ResultSetExtractor<Integer>() {
-//            @Override
-//            public Integer extractData(ResultSet rs) throws SQLException, DataAccessException {
-//                return rs.getInt("userTypeId");
-//            }
-//        };
-//        int type = template.query(sql,integerResultSetExtractor);
-
         String sql2 = "SELECT userTypeId FROM user WHERE email = ?";
         Integer type = template.queryForObject(sql2, new Object[]{email}, Integer.class);
-
-
-        System.out.println(type);
         switch (type){
             case 1:{
                 user.setUserType(new UserType(UserTypeCode.administrator));
