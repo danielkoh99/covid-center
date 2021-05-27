@@ -3,16 +3,8 @@ form.addEventListener("submit", (e) => {
     e.preventDefault();
     let password = document.querySelector('input[name=password]');
     const confirm = document.querySelector('input[name=password_confirm]');
-    if(password.value === ""){
-        password.setCustomValidity('Password field can not be empty');
-        return;
-    }
-    if(confirm.value === ""){
-        password.setCustomValidity('Confirm password field can not be empty');
-        return;
-    }
     if (confirm.value !== password.value) {
-        confirm.setCustomValidity('Passwords do not match');
+        alert('Passwords do not match');
         return;
     }
     const cprNumber = document.querySelector('input[name=cpr]').value;
