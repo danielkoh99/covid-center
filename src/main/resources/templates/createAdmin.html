@@ -9,32 +9,6 @@
     <link rel="icon" href="../../static/assets/logo.png" type="image/png" sizes="16x16">
     <meta charset="UTF-8">
     <title>Create Admin</title>
-    <script>
-        /* function checkPassowrd(form) {
-             password = form.password.value;
-             password_confirm = form.password_confirm.value;
-
-             if (password == '')
-                 alert ("Please enter Password");
-             else if (password_confirm == '')
-                 alert ("Please enter password confirmation");
-             else if (password != password_confirm) {
-                 alert("\nPassword did not match: please try again...")
-                 return false;
-             }
-         } */
-
-        function onChange() {
-            const password = document.querySelector('input[name=password]');
-            const confirm = document.querySelector('input[name=password_confirm]');
-            if (confirm.value === password.value) {
-                confirm.setCustomValidity('');
-            } else {
-                confirm.setCustomValidity('Passwords do not match');
-            }
-        }
-
-    </script>
 </head>
 <body>
 
@@ -98,11 +72,13 @@
             <div class="control-group" >
                 <!-- Button -->
                 <div class="controls" style="margin: auto">
-                    <input onclick="checkPassowrd(form)" type="submit" class="fadeIn fourth" value="Create" onChange="onChange()">
+                    <input type="submit" class="fadeIn fourth" value="Create">
                 </div>
             </div>
         </fieldset>
     </form>
 </div>
+<script src="../../static/js/createAdmin.js"></script>
+
 </body>
 </html>
