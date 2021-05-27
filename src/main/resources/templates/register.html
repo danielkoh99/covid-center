@@ -1,46 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link rel="stylesheet" href="./static/css/register.css">
-<link rel="icon" href="./static/assets/logo.png" type="image/png" sizes="16x16">
-
-
 <head>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="./static/css/register.css">
+    <link rel="icon" href="./static/assets/logo.png" type="image/png" sizes="16x16">
     <meta charset="UTF-8">
     <title>Register</title>
-    <script>
-       /* function checkPassowrd(form) {
-            password = form.password.value;
-            password_confirm = form.password_confirm.value;
-
-            if (password == '')
-                alert ("Please enter Password");
-            else if (password_confirm == '')
-                alert ("Please enter password confirmation");
-            else if (password != password_confirm) {
-                alert("\nPassword did not match: please try again...")
-                return false;
-            }
-        } */
-
-       function onChange() {
-           const password = document.querySelector('input[name=password]');
-           const confirm = document.querySelector('input[name=password_confirm]');
-           if (confirm.value === password.value) {
-               confirm.setCustomValidity('');
-           } else {
-               confirm.setCustomValidity('Passwords do not match');
-           }
-       }
-
-    </script>
 </head>
 <body>
-
 <div class="wrapper fadeInDown">
-<form class="form-horizontal" action='' method="POST">
+<form class="form-horizontal">
     <fieldset>
         <div id="formHeader">
             <h3>Register</h3>
@@ -83,7 +54,7 @@
             <label class="control-label" for="password">Password</label>
             <div class="controls">
                 <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
-                <p class="help-block">Password should be at least 4 characters</p>
+                <p class="help-block">Password should be at least 6 characters</p>
             </div>
         </div>
 
@@ -99,15 +70,16 @@
         <div class="control-group" >
             <!-- Button -->
             <div class="controls" style="margin: auto">
-                <input onclick="checkPassowrd(form)" type="submit" class="fadeIn fourth" value="Register" onChange="onChange()">
+                <input type="submit" class="fadeIn fourth" value="Register" onchange="onChange()">
             </div>
         </div>
+        <div id="formFooter">
+            Have already an account? <a class="underlineHover" href="/"> Log in</a>
+        </div>
     </fieldset>
-    <div id="formFooter">
-        Have already an account? <a class="underlineHover" href="/"> Log in</a>
-    </div>
-</form>
 
+</form>
+    <script src="./static/js/register.js"></script>
 </div>
 </body>
 </html>

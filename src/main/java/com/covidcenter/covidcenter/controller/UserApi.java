@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
-@CrossOrigin(origins = "*")
 @RestController("/api/user")
 public class UserApi {
     final String APIPATH = "/api/user";
@@ -106,6 +105,8 @@ public class UserApi {
             return new ResponseEntity<>(gson.toJson(validationErrors), HttpStatus.BAD_REQUEST);
         }
     }
+
+
 }
 /*
  * idUser:9 cprNumber:1234 name:tester surname:testurnem Age:12 userType:3

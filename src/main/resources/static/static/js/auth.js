@@ -16,8 +16,6 @@ function getCookie(cname) {
 }
 //check if the users cookie exist in the browser
 (function() {
-    // your page initialization code here
-    // the DOM will be available here
     const userid=getCookie("userID");
     if(userid>0){
         //this prevents server from endless loading of the page
