@@ -25,8 +25,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String home() {
-        bookingService.createBooking(1,new Booking(1,"d","f", new BookingStatus(BookingStatusCode.pending),new BookingType(BookingTypeCode.test),1));
-
         return "Index";
     }
 
@@ -49,7 +47,6 @@ public class HomeController {
     public String createAdmin() {
         return "createAdmin";
     }
-
 
 
     @GetMapping("/user")
