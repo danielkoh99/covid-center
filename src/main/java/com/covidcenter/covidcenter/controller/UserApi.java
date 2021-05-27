@@ -32,12 +32,29 @@ public class UserApi {
     }
 
     @PostMapping(APIPATH)
-    public ResponseEntity<?> Create(@RequestBody String u, @RequestHeader HttpHeaders headers) {
+    public ResponseEntity<?> Create(@RequestBody String u, @RequestHeader HttpHeaders headers, @RequestParam int type ) {
         Gson gson = new Gson();
         ArrayList<ValidationError> validationErrors = new ArrayList<>();
         try {
             User user = gson.fromJson(u, User.class);
-            user.setUserType(new UserType(UserTypeCode.user));
+            System.out.println(type);
+            switch (type){
+                case 1: {
+                    user.setUserType(new UserType(UserTypeCode.administrator));
+                    break;
+                }
+                case 2: {
+                    user.setUserType(new UserType(UserTypeCode.secretary));
+                    break;
+                }
+                case 3: {
+                    user.setUserType(new UserType(UserTypeCode.user));
+                    break;
+                }
+                default: {
+                    break;
+                }
+            }
             // u= new user(1,"45672345","George","Brown",34,new
             // userType(userTypeCode.user),"george","12","hhh","");
             validationErrors = user.userValid();
