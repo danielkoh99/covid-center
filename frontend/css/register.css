@@ -18,6 +18,7 @@ label {
     min-height: 100%;
     padding: 20px;
     background-color: #24252A;
+    margin-top: 75px;
 }
 
 .fadeInDown {
@@ -200,10 +201,20 @@ input[type="submit"], input[type="reset"] {
     display: inline-block;
     text-transform: uppercase;
     font-size: 13px;
-    -webkit-box-shadow: 0 10px 30px 0 rgb(95 186 233 / 40%);
-    box-shadow: 0 10px 30px 0 rgb(95 186 233 / 40%);
+    -webkit-box-shadow: 0 10px 30px 0 rgb(95 186 233/40%);
+    box-shadow: 0 10px 30px 0 rgb(95 186 233/40%);
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
     margin: 5px 20px 40px 20px;
     -webkit-transition: all 0.3s ease-in-out;
+}
+
+.fas {
+    font-size: 40px;
+    color: #fff;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    z-index: 10;
 }
