@@ -8,14 +8,10 @@ import com.covidcenter.covidcenter.model.UserType;
 import com.covidcenter.covidcenter.service.IUserService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.bind.validation.ValidationErrors;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 
 @RestController("/api/user")
@@ -33,13 +29,13 @@ public class UserApi {
     }
 
     @PostMapping(APIPATH)
-    public ResponseEntity<?> Create(@RequestBody String u, @RequestHeader HttpHeaders headers, @RequestParam int type ) {
+    public ResponseEntity<?> Create(@RequestBody String u, @RequestHeader HttpHeaders headers, @RequestParam int type) {
         Gson gson = new Gson();
         ArrayList<ValidationError> validationErrors = new ArrayList<>();
         try {
             User user = gson.fromJson(u, User.class);
             System.out.println(type);
-            switch (type){
+            switch (type) {
                 case 1: {
                     user.setUserType(new UserType(UserTypeCode.administrator));
                     break;
@@ -56,8 +52,7 @@ public class UserApi {
                     break;
                 }
             }
-            // u= new user(1,"45672345","George","Brown",34,new
-            // userType(userTypeCode.user),"george","12","hhh","");
+
             validationErrors = user.userValid();
             if (validationErrors.size() == 0) {
                 int result = userService.addUser(user);
@@ -78,15 +73,14 @@ public class UserApi {
 
     }
 
-
     @PostMapping(APIPATH + "/login")
-    //for testing purposes email= email@email.com password: test123
+    // for testing purposes email= email@email.com password: test123
     public ResponseEntity<?> Login(@RequestBody String u) {
         Gson gson = new Gson();
         ArrayList<ValidationError> validationErrors = new ArrayList<>();
         try {
             User user = gson.fromJson(u, User.class);
-//            user.setUserType(new UserType(UserTypeCode.user));
+            // user.setUserType(new UserType(UserTypeCode.user));
             // u= new user(1,"45672345","George","Brown",34,new
             // userType(userTypeCode.user),"george","12","hhh","");
 
@@ -123,14 +117,15 @@ public class UserApi {
             return new ResponseEntity<>(gson.toJson(validationErrors), HttpStatus.BAD_REQUEST);
         }
     }
+
     @PostMapping(APIPATH + "/toggleUserType")
     public ResponseEntity<?> ToggleUserType(@RequestBody String u, @RequestHeader HttpHeaders headers) {
         Gson gson = new Gson();
         ArrayList<ValidationError> validationErrors = new ArrayList<>();
         try {
             UserToggleBody user = gson.fromJson(u, UserToggleBody.class);
-            userService.toggle(user.getIdUser(),UserTypeCode.getCodeByNumber(user.getUserType()));
-            return new ResponseEntity<>("",HttpStatus.OK);
+            userService.toggle(user.getIdUser(), UserTypeCode.getCodeByNumber(user.getUserType()));
+            return new ResponseEntity<>("", HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             validationErrors.add(new ValidationError("Exception", e.getMessage()));

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+<link rel="stylesheet" href="static/css/useractions.css">
+    <title>Actions</title>
+  </head>
+  <body>
+  
+  <div class="container-fluid h-100" >
+      <!-- Nav start -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Actions</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Nav end -->
+
+    <!-- List and search users table -->
+    <div class="table-responsive table-container userTable">
+      <input class="search" type="text" placeholder="Search for user..." />
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">CPR Number</th>
+            <th scope="col">Email</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="userInfoTable"></tbody>
+      </table>
+    </div>
+      <!-- List and search users table end-->
+
+      <div class="table-responsive table-container testTableContainer">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">CPR Number</th>
+              <th scope="col">TestPlace</th>
+              <th scope="col">Result</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="testTable"></tbody>
+        </table>
+      </div>
+
+      <div class="table-responsive table-container vaccineTableContainer">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">CPR Number</th>
+              <th scope="col">TestPlace</th>
+              <th scope="col">Result</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="vaccineTable"></tbody>
+        </table>
+      </div>
+
+      <!-- Covid test input -->
+    <div class="testpop d-flex align-items-center justify-content-center d-none" >
+      <div class="covid-test card position-absolute" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title ">Name: </h5>
+          <h6 class="name"></h6>
+          <h5 class="card-subtitle mb-2 text-muted">CPR: </h5>
+          <h6 class="cpr"></h6>
+          <h5 class="text-info">Add date of covid test</h2>
+          <input type="date" class="date-input"/>
+          <h5 class="text-info">Add place of covid test</h2>
+          <input type="text" class="test-input" placeholder="Add place"/>
+          <input type="radio" id="positive" name="test" value="positive" class="positiveResultInput">
+          <label for="positive">Positive</label><br>
+          <input type="radio" id="negative" name="test" value="negative" class="negativeResultInput" >
+          <label for="negative">Negative</label><br>
+          <button class="btn btn-outline-primary saveTest">Save</button>
+          <button class="btn btn-danger closeTest">Close</button>
+        </div>
+      </div>
+    </div>
+      <!-- Covid test input end -->
+
+      <!-- Covid vaccine input  -->
+    <div class="vaccinepop d-flex align-items-center justify-content-center d-none" >
+      <div class="vaccine card position-absolute" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title ">Name: </h5>
+          <h6 class="person-name"></h6>
+          <h5 class="card-subtitle mb-2 text-muted">CPR: </h5>
+          <h6 class="person-cpr"></h6>
+          <h5 class="text-info">Add date of vaccine</h2>
+          <input type="date" required class="date-input"/>
+          <h5 class="text-info">Add place of vaccine</h2>
+          <input type="text" required class="test-input" placeholder="Add place"/>
+          <button class="btn btn-outline-primary saveVaccine">Save</button>
+          <button class="btn btn-danger closeVaccine">Close</button>
+        </div>
+      </div>
+    </div>
+      <!-- Covid vaccine input end -->
+
+  </div>
+    <script type="text/javascript" src="../js/userActions.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

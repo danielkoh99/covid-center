@@ -1,0 +1,17 @@
+.table-container > input[type="text"] {
+  width: 200px;
+  margin-left: 2%;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+.table-container > input[type="text"]:focus {
+  width: 50%;
+}
+.table-container > input[type="text"]:hover {
+  border: 2px solid black;
+}
+.test-input,
+.date-input {
+  margin-bottom: 1rem;
+  width: 100%;
+}

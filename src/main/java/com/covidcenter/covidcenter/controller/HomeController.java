@@ -48,7 +48,6 @@ public class HomeController {
         return "createAdmin";
     }
 
-
     @GetMapping("/user")
     public String user() {
         return "user";
@@ -56,9 +55,7 @@ public class HomeController {
 
     @GetMapping("/secretary")
     public String secretary() {
-        return "secretary";
+        return "userActions";
     }
-
-
 
 }

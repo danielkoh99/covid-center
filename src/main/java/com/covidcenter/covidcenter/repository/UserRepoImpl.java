@@ -32,7 +32,7 @@ public class UserRepoImpl implements IUserRepo {
     @Override
     public int toggle(int userID, UserTypeCode type) {
         String sql = "UPDATE user SET userTypeId= ? WHERE (id_user = ?);";
-        return template.update(sql, type.getCode(),userID);
+        return template.update(sql, type.getCode(), userID);
     }
 
     @Override
@@ -53,24 +53,26 @@ public class UserRepoImpl implements IUserRepo {
     public User getUser(int userID) {
         String sql = "SELECT * FROM user WHERE (id_user=?) LIMIT 1";
         User user = template.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), userID);
-        sql = "SELECT userTypeId FROM user WHERE email='"+userID+"' LIMIT 1";
+        sql = "SELECT userTypeId FROM user WHERE email='" + userID + "' LIMIT 1";
         ResultSetExtractor<Integer> integerResultSetExtractor = new ResultSetExtractor<Integer>() {
             @Override
             public Integer extractData(ResultSet rs) throws SQLException, DataAccessException {
                 return rs.findColumn("userTypeId");
             }
         };
-        int type = template.query(sql,integerResultSetExtractor);
-        switch (type){
-            case 1: user.setUserType(new UserType(UserTypeCode.administrator));
+        int type = template.query(sql, integerResultSetExtractor);
+        switch (type) {
+            case 1:
+                user.setUserType(new UserType(UserTypeCode.administrator));
                 break;
-            case 2: user.setUserType(new UserType(UserTypeCode.secretary));
+            case 2:
+                user.setUserType(new UserType(UserTypeCode.secretary));
                 break;
-            case 3: user.setUserType(new UserType(UserTypeCode.user));
+            case 3:
+                user.setUserType(new UserType(UserTypeCode.user));
                 break;
         }
         return user;
-
 
     }
 
@@ -79,9 +81,9 @@ public class UserRepoImpl implements IUserRepo {
         String sql = "SELECT * FROM user WHERE (email=?) LIMIT 1";
         User user = template.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), email);
         String sql2 = "SELECT userTypeId FROM user WHERE email = ?";
-        Integer type = template.queryForObject(sql2, new Object[]{email}, Integer.class);
-        switch (type){
-            case 1:{
+        Integer type = template.queryForObject(sql2, new Object[] { email }, Integer.class);
+        switch (type) {
+            case 1: {
                 user.setUserType(new UserType(UserTypeCode.administrator));
                 break;
             }
