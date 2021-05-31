@@ -50,13 +50,11 @@ searchInput.addEventListener("keyup", (e) => {
     );
   });
   renderUsers(filteredUsers);
-  // renderUsers();
 });
 const renderTests = (tests) => {
   let HTML = "";
 
   tests.map((test, idx) => {
-    console.log(test);
     HTML += `
     <tr>
       <th scope="row">${idx + 1}</th>
