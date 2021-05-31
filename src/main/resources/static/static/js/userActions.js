@@ -130,13 +130,15 @@ testSaveBtn.addEventListener("click", () => {
     testTime: date,
   };
   console.log(data);
-  if (cpr || result || place != "") {
+  if (place != "") {
     fetch(covidTestUrl, {
       method: "POST",
       body: JSON.stringify(data),
     });
-  } else alert("please enter all fields");
-
+  }
+  if (result || place === "") {
+    alert("please enter all fields");
+  }
   testPopup.classList.add("d-none");
   tableContainer.style.pointerEvents = "auto";
   tableContainer.style.opacity = "1";
