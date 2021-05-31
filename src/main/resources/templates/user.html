@@ -50,7 +50,7 @@
     </div>
     <div class="userTestContainer">
         <h1><u>Bookings</u></h1>
-        <div id="bookingData"></div>
+        <table class="table" id="bookingData"></table>
     </div>
 </div>
 
@@ -76,11 +76,41 @@
     }
 
     function RenderData(){
-        
-    }
+        bookingData.innerHTML="";
+        let HTML = ` <thead>
+        <tr>
+            <th scope="col">Time</th>
+            <th scope="col">Type</th>
+            <th scope="col">Status</th>
+        </tr>
+        </thead><tbody>`;
+        userBooking.map((booking, idx) => {
+            HTML += `
+    <tr>
+      <td class="item">${booking.time}</td>
+      <td class="item">${booking.bookingType_idbookingType.type}</td>
+      <td class="item">${booking.bookingStatus_idbookingStatus.bookingStatus}<span>(${booking.endTime})</span></td>
+    </td>
+    </tr>
+`;
+        });
 
+        bookingData.innerHTML = HTML+"</tbody>";
+
+    }
+    let userBooking=[];
     const bookingForm = document.querySelector("#formBooking");
     const bookingData = document.querySelector("#bookingData");
+    fetch("api/booking", {
+        method: "GET",
+        headers: new Headers({"userID": getCookie("userID"),"token": getCookie("token")})
+    }).then(response => response.json()).then(data => {
+        // do something with your data
+        userBooking=data;
+        RenderData();
+    });
+
+
     bookingForm.addEventListener("submit", (e) => {
         e.preventDefault();
         let date = bookingForm.bookingTime.value;
@@ -99,9 +129,11 @@
                 method: "POST",
                 headers: new Headers({"userID": getCookie("userID"),"token": getCookie("token")}),
                 body: JSON.stringify(data),
-            }).then((data)=> {
-                console.log(data.text())
-            })
+            }).then(response => response.json()).then(data => {
+                // do something with your data
+                userBooking=data;
+                RenderData();
+            });
         } else alert("please enter all fields");
 
     });
