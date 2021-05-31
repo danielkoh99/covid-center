@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="../static/js/auth.js"></script>
 
     <meta charset="UTF-8">
     <title>Admin</title>
@@ -23,14 +22,17 @@
 <div class="container">
     <div><a><h2>Test results</h2></a></div>
     <div><a><h2>Users</h2></a></div>
-    <div><a href="/admin/create/secretary"><h2>Create secretary</h2></a></div>
-    <div><a href="/admin/create/admin"><h2>Create admin</h2></a></div>
+    <a href="/admin/create/secretary"> <div><h2>Create secretary</h2></div></a>
+    <a href="/admin/create/admin"> <div><h2>Create admin</h2></div></a>
 </div>
 
 <footer>
     <a>Copyright ©<script>document.write(new Date().getFullYear());</script> | All rights reserved | Powered by B.B.H(Simon, Vlad, Andrei & Daniel)  </a>
 </footer>
+<script src="../static/js/cookie.js"></script>
 <script src="../static/js/logout.js"></script>
+<script src="../static/js/authAdmin.js"></script>
+
 </body>
 
 </html>

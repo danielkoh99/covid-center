@@ -4,24 +4,25 @@ body{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: #24252A;
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: #24252A;
+
 }
 
 li, a, button {
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
     font-size: 16px;
-    color: #ffffff;
     text-decoration: none;
 }
 
 header {
+    background-color: #24252A;
     display: flex;
     justify-content: flex-end;
     align-items: center;
