@@ -63,4 +63,9 @@ public class HomeController {
         return "useractions";
     }
 
+    @GetMapping("/userlist")
+    public String userlist() {
+        return "userlist";
+    }
+
 }
