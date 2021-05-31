@@ -55,7 +55,12 @@ public class HomeController {
 
     @GetMapping("/secretary")
     public String secretary() {
-        return "userActions";
+        return "secretary";
+    }
+
+    @GetMapping("/useractions")
+    public String useractions() {
+        return "useractions";
     }
 
 }

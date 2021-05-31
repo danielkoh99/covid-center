@@ -1,5 +1,5 @@
 const userUrl = "http://localhost:5555/api/user";
-const covidTestUrl = "http://localhost:5555/api/useraction/test";
+const covidTestUrl = "http://localhost:5555/actionApi/test";
 let userTable = document.querySelector(".userInfoTable");
 const searchInput = document.querySelector(".search");
 const testPopup = document.querySelector(".testpop");
@@ -19,7 +19,6 @@ const testInput = document.querySelector(".test-input");
 const testDateInput = document.querySelector(".date-input");
 const positiveResultInput = document.querySelector(".positiveResultInput");
 const negativeResultInput = document.querySelector(".negativeResultInput");
-
 let users = [];
 let tests = [];
 const getUsers = async () => {
@@ -57,23 +56,16 @@ const renderTests = (tests) => {
   let HTML = "";
 
   tests.map((test, idx) => {
+    console.log(test);
     HTML += `
     <tr>
       <th scope="row">${idx + 1}</th>
-      <td class="item">${test.cprNumber}</td>
-      <td class="item">${test.testPlace}</td>
-      <td class="item">${test.testResult}</td>
-      <td class="item"></td>
+      <td class="item">${test.cpr_number}</td>
+      <td class="item">${test.test_place}</td>
+      <td class="item">${test.test_result}</td>
+      <td class="item">${test.test_time}</td>
       <td align="center">
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        Edit
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <li><button class="btn btn-secondary dropdown-item test-btn" onclick="getTestPopup()">Add test</button></li>
-        <li><button class="btn btn-secondary dropdown-item vaccine" onclick="getVaccinePopup()">Add vaccine</button></li>
-      </ul>
-    </div>
+    <button class="btn btn-secondary test-btn" onclick="">Update result</button>
     </td>
     </tr>  
 `;
@@ -120,8 +112,8 @@ const renderUsers = (data) => {
 };
 
 testSaveBtn.addEventListener("click", () => {
-  let date = testInput.value;
-  let place = testDateInput.value;
+  let place = testInput.value;
+  let date = testDateInput.value;
   let result = "";
   if (negativeResultInput.checked) {
     positiveResultInput.checked = false;
@@ -139,6 +131,7 @@ testSaveBtn.addEventListener("click", () => {
     testResult: result,
     testTime: date,
   };
+  console.log(data);
   if (cpr || result || place != "") {
     fetch(covidTestUrl, {
       method: "POST",
@@ -189,5 +182,20 @@ closeVaccine.addEventListener("click", () => {
   testTableContainer.style.pointerEvents = "auto";
   testTableContainer.style.opacity = "1";
 });
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(";");
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == " ") {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
 getTests();
 getUsers();

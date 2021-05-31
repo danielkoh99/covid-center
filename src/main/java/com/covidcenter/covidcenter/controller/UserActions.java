@@ -12,9 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
+@RestController("/actionApi")
 public class UserActions {
-    final String APIPATH = "/api/useraction";
+    final String APIPATH = "/actionApi";
     @Autowired
     UserActionService userActionService;
 
@@ -39,7 +39,7 @@ public class UserActions {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PostMapping(APIPATH + "/test")
+    @PostMapping(APIPATH + "/vaccine")
     public ResponseEntity<?> CreateVaccine(@RequestBody String vaccine) {
         Gson gson = new Gson();
         CovidTest test = gson.fromJson(vaccine, CovidTest.class);
