@@ -168,20 +168,21 @@ const getVaccinePopup = (user) => {
   personNameVaccine.innerHTML = userInfo.cprNumber;
   personCPRVaccine.innerHTML = userInfo.name + userInfo.surname;
 };
+/*
 closeTest.addEventListener("click", () => {
   testPopup.classList.add("d-none");
   tableContainer.style.pointerEvents = "auto";
   tableContainer.style.opacity = "1";
   testTableContainer.style.pointerEvents = "auto";
   testTableContainer.style.opacity = "1";
-});
-closeVaccine.addEventListener("click", () => {
+});*/
+/*closeVaccine.addEventListener("click", () => {
   testPopup.classList.add("d-none");
   tableContainer.style.pointerEvents = "auto";
   tableContainer.style.opacity = "1";
   testTableContainer.style.pointerEvents = "auto";
   testTableContainer.style.opacity = "1";
-});
+});*/
 function getCookie(cname) {
   var name = cname + "=";
   var decodedCookie = decodeURIComponent(document.cookie);
