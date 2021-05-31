@@ -17,13 +17,28 @@ function getCookie(cname) {
 //check if the users cookie exist in the browser
 (function() {
     const userid=getCookie("userID");
+    const userType=getCookie("userType");
     if(userid>0){
-        //this prevents server from endless loading of the page
-        if(window.location.href === "http://localhost:5555/") window.location.replace("/admin");
-        else return;
-    }else {
-        //this prevents server from endless loading of the page
+        switch (userType){
+            case "administrator":
+                if(window.location.href === "http://localhost:5555/") window.location.replace("/admin");
+                break;
+            case "secretary":
+                if(window.location.href === "http://localhost:5555/") window.location.replace("/secretary");
+                break;
+            case "user":
+                if(window.location.href === "http://localhost:5555/") window.location.replace("/user");
+                break;
+            default:
+                if(window.location.href === "http://localhost:5555/") return;
+                else window.location.replace("/");
+                break;
+        }
+    }
+    else{
         if(window.location.href === "http://localhost:5555/") return;
         else window.location.replace("/");
     }
+
+
 })();

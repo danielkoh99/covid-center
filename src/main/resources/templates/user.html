@@ -1,10 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="../static/css/reset.css">
+    <script src="../static/js/auth.js"></script>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Covid center</title>
+
+    <link rel="stylesheet" href="../static/css/user.css">
+    <link rel="icon" href="../static/assets/logo.png" type="image/png" sizes="16x16">
 </head>
 <body>
+<header>
+    <img class="logo" src="./static/assets/logo.png">
+    <nav>
+        <ul class="nav_links">
+            <li><a href="#">Welcome, <span id="userNamePlaceholder">name</span></a></li>
+        </ul>
+    </nav>
+    <a id="logoutButton" class="cta" href="#"><button>Logout</button></a>
+</header>
 
+<div class="container">
+    <div class="bookTestContainer">
+        <h1><u>Create a booking</u></h1>
+        <div>
+            <form id="formBooking">
+                <ul>
+                    <li class="form-group">
+                        <label for="bookingTime">Select time:</label>
+                        <input  type="datetime-local" value="2021-05-31T00:00:00" id="bookingTime">
+                    </li>
+                    <li class="form-group">
+                        <label for="bookingType">Type of booking:</label>
+                        <select class="form-control"  id="bookingType" name="bookingType">
+                            <option value="1">Test</option>
+                            <option value="2">Vaccination</option>
+                        </select>
+                    </li>
+                    <li class="form-group">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </li>
+
+                </ul>
+            </form>
+        </div>
+    </div>
+    <div class="userTestContainer">
+        <h1><u>Bookings</u></h1>
+        <div id="bookingData"></div>
+    </div>
+</div>
+
+<footer>
+    <a>Copyright ©<script>document.write(new Date().getFullYear());</script> | All rights reserved | Powered by B.B.H(Simon, Vlad, Andrei & Daniel)  </a>
+</footer>
+<script src="../static/js/logout.js"></script>
+<script>
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    function RenderData(){
+        
+    }
+
+    const bookingForm = document.querySelector("#formBooking");
+    const bookingData = document.querySelector("#bookingData");
+    bookingForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let date = bookingForm.bookingTime.value;
+        let type = bookingForm.bookingType.value;
+
+        let data = {
+            "idbookings":0,
+            "time": date,
+            "endTime": "",
+            "bookingStatus_idbookingStatus": 1,
+            "bookingType_idbookingType": parseInt(type),
+            "user_id_user": parseInt(getCookie("userID"))
+        };
+        if (date || type!= "") {
+            fetch("api/booking", {
+                method: "POST",
+                headers: new Headers({"userID": getCookie("userID"),"token": getCookie("token")}),
+                body: JSON.stringify(data),
+            }).then((data)=> {
+                console.log(data.text())
+            })
+        } else alert("please enter all fields");
+
+    });
+
+</script>
 </body>
+
 </html>
