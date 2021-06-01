@@ -65,9 +65,9 @@ searchInput.addEventListener("keyup", (e) => {
   renderUsers(filteredUsers);
 });
 
-const findCpr = (userID)=>{
- return users.find(user=>user.idUser==userID);
-}
+const findCpr = (userID) => {
+  return users.find((user) => user.idUser == userID);
+};
 const renderTests = (tests) => {
   let HTML = "";
 
@@ -75,17 +75,19 @@ const renderTests = (tests) => {
     HTML += `
     <tr>
       <th scope="row">${test.idbookings}</th>
-      <td class="item">(${test.user_id_user})${findCpr(test.user_id_user).cprNumber}</td>
+      <td class="item">(${test.user_id_user})${
+      findCpr(test.user_id_user).cprNumber
+    }</td>
       <td class="item">Covid center</td>
       <td class="item">${test.bookingType_idbookingType.type}</td>
       <td class="item">${test.bookingStatus_idbookingStatus.bookingStatus}</td>
       <td class="item">${test.time}</td>
       <td align="center">
     <button class="btn btn-secondary test-btn" onclick="getBookingPopup('${JSON.stringify(
-        test
+      test
     )
-        .split('"')
-        .join("&quot;")}')">Update result</button>
+      .split('"')
+      .join("&quot;")}')">Update result</button>
     </td>
     </tr>  
 `;
@@ -162,54 +164,6 @@ testSaveBtn.addEventListener("click", (e) => {
   testTableContainer.style.opacity = "1";
 });
 
-
-EditTestBtn.addEventListener("click", (e) => {
-  let place = ""
-
-  let cpr = bookingID.value;
-  let result=bookingStatus.value;
-  let data = {
-    cprNumber: cpr,
-    testPlace: place,
-    testResult: result,
-    testTime: "date",
-  };
-
-  fetch(covidVaccineURl, {
-    method: "PUT",
-    body: JSON.stringify(data),
-  });
-  testPopup.classList.add("d-none");
-  tableContainer.style.pointerEvents = "auto";
-  tableContainer.style.opacity = "1";
-  testTableContainer.style.pointerEvents = "auto";
-  testTableContainer.style.opacity = "1";
-});
-
-vaccineSaveBtn.addEventListener("click", (e) => {
-  let date = vaccineDateInput.value;
-  let result = "";
-
-  let cpr = personIDVaccine.value;
-  let data = {
-    cprNumber: cpr,
-    testPlace: "asd",
-    testResult: "positive",
-    testTime: date,
-  };
-
-  fetch(covidVaccineURl, {
-    method: "POST",
-    body: JSON.stringify(data),
-  });
-  vaccinePopup.classList.add("d-none");
-  tableContainer.style.pointerEvents = "auto";
-  tableContainer.style.opacity = "1";
-  testTableContainer.style.pointerEvents = "auto";
-  testTableContainer.style.opacity = "1";
-  location.reload();
-});
-
 const getTestPopup = (user) => {
   console.log(JSON.parse(user));
   let userInfo = JSON.parse(user);
@@ -231,8 +185,9 @@ const getBookingPopup = (booking) => {
   tableContainer.style.opacity = "0.3";
   testTableContainer.style.pointerEvents = "none";
   testTableContainer.style.opacity = "0.3";
-  bookingID.value=bookingInfo.idbookings;
-  bookingStatus.value=bookingInfo.bookingStatus_idbookingStatus.idbookingStatus;
+  bookingID.value = bookingInfo.idbookings;
+  bookingStatus.value =
+    bookingInfo.bookingStatus_idbookingStatus.idbookingStatus;
 };
 
 const getVaccinePopup = (user) => {
@@ -245,7 +200,7 @@ const getVaccinePopup = (user) => {
   testTableContainer.style.opacity = "0.3";
   personNameVaccine.innerHTML = userInfo.name + "" + userInfo.surname;
   personIDVaccine.value = userInfo.idUser;
-  personCPRVaccine.innerHTML ="CPR:"+ userInfo.cprNumber;
+  personCPRVaccine.innerHTML = "CPR:" + userInfo.cprNumber;
 };
 
 closeTest.addEventListener("click", () => {
@@ -278,6 +233,6 @@ function getCookie(cname) {
   }
   return "";
 }
-getUsers().then(()=>{
+getUsers().then(() => {
   getTests();
 });

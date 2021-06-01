@@ -54,50 +54,6 @@
       </div>
       <!-- List and search users table end-->
 
-      <div
-        class="
-          table_wrapper table-responsive table-container
-          testTableContainer
-        "
-      >
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">(ID)CPR Number</th>
-              <th scope="col">Test place</th>
-              <th scope="col">Type</th>
-              <th scope="col">Status</th>
-              <th scope="col">Test time</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody class="testTable"></tbody>
-        </table>
-      </div>
-
-      <!-- Covid test input -->
-      <!-- <div class="testpop d-flex align-items-center justify-content-center d-none" >
-      <div class="covid-test card position-absolute" style="width: 18rem">
-        <div class="card-body">
-          <h5 class="card-title ">Name: </h5>
-          <h6 class="name"></h6>
-          <h5 class="card-subtitle mb-2 text-muted">CPR: </h5>
-          <h6 class="cpr"></h6>
-          <h5 class="text-info">Add date of covid test</h2>
-          <input type="date" class="date-input"/>
-          <h5 class="text-info">Add place of covid test</h2>
-          <input type="text" class="test-input" placeholder="Add place"/>
-          <input type="radio" id="positive" name="test" value="positive" class="positiveResultInput">
-          <label for="positive">Positive</label><br>
-          <input type="radio" id="negative" name="test" value="negative" class="negativeResultInput" >
-          <label for="negative">Negative</label><br>
-          <button class="btn btn-outline-primary saveTest">Save</button>
-          <button class="btn btn-danger closeTest">Close</button>
-        </div>
-      </div>
-    </div>
-    -->
       <div class="test-modal testedit d-none" id="testedit" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
@@ -109,16 +65,20 @@
               <form id="add_child_form3">
                 <div class="mb-3">
                   <input
-                          type="text"
-                          class="date-input"
-                          id="bookingID"
-                          value=""
-                          hidden
+                    type="text"
+                    class="date-input"
+                    id="bookingID"
+                    value=""
+                    hidden
                   />
                 </div>
                 <div class="mb-3">
                   <label for="cpr" class="form-label">Status</label>
-                  <select class="form-control"  id="bookingStatus" name="bookingType">
+                  <select
+                    class="form-control"
+                    id="bookingStatus"
+                    name="bookingType"
+                  >
                     <option value="1">pending</option>
                     <option value="2">positive</option>
                     <option value="3">negative</option>
@@ -211,7 +171,10 @@
       <!-- Covid test input end -->
 
       <!-- Covid vaccine input  -->
-      <div class="test-modal vaccinepop d-none" id="exampleModal2" tabindex="-1"
+      <div
+        class="test-modal vaccinepop d-none"
+        id="exampleModal2"
+        tabindex="-1"
       >
         <div class="vaccine card position-absolute" style="width: 18rem">
           <div class="card-body">
@@ -221,13 +184,18 @@
             <h6 class="person-cpr"></h6>
             <h5 class="text-info">Add date of vaccine</h5>
             <input
-                    type="text"
-                    class="date-input"
-                    id="patientIdVaccine"
-                    value=""
-                    hidden
+              type="text"
+              class="date-input"
+              id="patientIdVaccine"
+              value=""
+              hidden
             />
-            <input id="dateVaccine" type="datetime-local" required class="date-input" />
+            <input
+              id="dateVaccine"
+              type="datetime-local"
+              required
+              class="date-input"
+            />
             <h5 class="text-info">Add place of vaccine</h5>
             <input
               type="text"
