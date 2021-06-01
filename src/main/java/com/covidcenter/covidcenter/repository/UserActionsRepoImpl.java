@@ -1,5 +1,6 @@
 package com.covidcenter.covidcenter.repository;
 
+import com.covidcenter.covidcenter.model.Booking;
 import com.covidcenter.covidcenter.model.CovidTest;
 import com.covidcenter.covidcenter.model.Vaccine;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ import java.util.List;
 public class UserActionsRepoImpl implements UserActionsRepo {
     @Autowired
     JdbcTemplate template;
+
+    @Autowired
+    IBookingRepo bookingRepo;
 
     @Override
     public List<CovidTest> fetchAll() {
@@ -30,27 +34,23 @@ public class UserActionsRepoImpl implements UserActionsRepo {
     }
 
     @Override
-    public int addTest(CovidTest test) {
-        String sql = "INSERT INTO covidtest(cpr_number,test_place,test_result,test_time) VALUES(?,?,?,?)";
-        return template.update(sql, test.getCprNumber(), test.getTestPlace(), test.getTestResult(), test.getTestTime());
+    public int addTest(Booking test) {
+        return bookingRepo.createBooking(test.getUser_id_user(),test);
     }
 
     @Override
-    public int addVaccine(Vaccine vaccine) {
-        String sql = "INSERT INTO vaccine(cpr_number,vaccine_place,vaccine_date) VALUES(?,?,?)";
-        return template.update(sql, vaccine.getCprNumber(), vaccine.getPlace(), vaccine.getTime());
+    public int addVaccine(Booking vaccine) {
+        return bookingRepo.createBooking(vaccine.getUser_id_user(),vaccine);
     }
 
     @Override
-    public int changeVaccineStatus(int userID, Vaccine vaccine) {
-        String sql = "UPDATE vaccine SET cpr_number = ?,test_place = ?, test_time = ?, WHERE ( userID = ?)";
-        return template.update(sql, vaccine.getCprNumber(), vaccine.getPlace(), vaccine.getTime());
+    public int changeVaccineStatus(int userID, Booking vaccine) {
+        return bookingRepo.updateBooking(vaccine.getUser_id_user(),vaccine);
     }
 
     @Override
-    public int changeTestStatus(int userID, CovidTest test) {
-        String sql = "UPDATE covidtest SET cpr_number = ?,test_place = ?, test_result = ?, test_time = ?, WHERE ( userID = ?)";
-        return template.update(sql, test.getCprNumber(), test.getTestPlace(), test.getTestResult(), test.getTestTime());
+    public int changeTestStatus(int userID, Booking test) {
+        return bookingRepo.updateBooking(test.getUser_id_user(),test);
     }
 
 }

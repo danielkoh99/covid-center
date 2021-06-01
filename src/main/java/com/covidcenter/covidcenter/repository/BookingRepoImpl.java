@@ -12,6 +12,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,8 +75,11 @@ public class BookingRepoImpl implements IBookingRepo{
 
     @Override
     public int updateBooking(int userID, Booking booking) {
-        String sql = "UPDATE booking SET time = ?, endTime = ?, bookingStatus_idbookingStatus = ?, bookingType_idbookingType = ?, user_id_user= ? WHERE ( idbookings = ?)";
-        return template.update(sql, booking.getTime(), booking.getEndTime(), booking.getBookingStatus_idbookingStatus().getId(), booking.getBookingType_idbookingType().getIdbookingType(),booking.getUser_id_user(),booking.getIdbookings());
+        String sql = "UPDATE booking SET endTime=? , bookingStatus_idbookingStatus = ?  WHERE ( idbookings = ?)";
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formatDateTime = now.format(format);
+        return template.update(sql, formatDateTime,booking.getBookingStatus_idbookingStatus().getId(),booking.getIdbookings());
     }
 
     @Override

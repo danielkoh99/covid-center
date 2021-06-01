@@ -2,6 +2,7 @@ package com.covidcenter.covidcenter.service;
 
 import java.util.List;
 
+import com.covidcenter.covidcenter.model.Booking;
 import com.covidcenter.covidcenter.model.CovidTest;
 import com.covidcenter.covidcenter.model.Vaccine;
 import com.covidcenter.covidcenter.repository.UserActionsRepo;
@@ -25,22 +26,22 @@ public class UserActionServiceImpl implements UserActionService {
     }
 
     @Override
-    public int addTest(CovidTest test) {
+    public int addTest(Booking test) {
         return userActionsRepo.addTest(test);
     }
 
     @Override
-    public int addVaccine(Vaccine vaccine) {
+    public int addVaccine(Booking vaccine) {
         return userActionsRepo.addVaccine(vaccine);
     }
 
     @Override
-    public int changeTestStatus(int userID, CovidTest test) {
+    public int changeTestStatus(int userID, Booking test) {
         return userActionsRepo.changeTestStatus(userID, test);
     }
 
     @Override
-    public int changeVaccineStatus(int userID, Vaccine vaccine) {
+    public int changeVaccineStatus(int userID, Booking vaccine) {
         return userActionsRepo.changeVaccineStatus(userID, vaccine);
     }
 

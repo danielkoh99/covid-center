@@ -1,5 +1,6 @@
 const userUrl = "http://localhost:5555/api/user";
 const covidTestUrl = "http://localhost:5555/actionApi/test";
+const covidVaccineURl = "http://localhost:5555/actionApi/vaccine";
 let userTable = document.querySelector(".userInfoTable");
 const searchInput = document.querySelector(".search");
 const testPopup = document.querySelector(".testpop");
@@ -10,14 +11,22 @@ const closeTest = document.querySelector(".closeTest");
 const personNameTest = document.getElementById("name");
 const personName = document.querySelector(".name");
 const personCPRTest = document.getElementById("cpr");
+const personIDTest = document.getElementById("patientid");
+const personIDVaccine = document.getElementById("patientIdVaccine");
 const closeVaccine = document.querySelector(".closeVaccine");
-const personNameVaccine = document.querySelector(".person-name");
-const personCPRVaccine = document.querySelector(".person-cpr");
+const personNameVaccine = document.getElementById("person-name");
+const personCPRVaccine = document.getElementById("person-cpr");
 const testTable = document.querySelector(".testTable");
 const testForm = document.querySelector(".testForm");
 const testSaveBtn = document.querySelector(".saveTest");
+const EditTestBtn = document.querySelector(".EditTest");
+const vaccineSaveBtn = document.querySelector(".saveVaccine");
 const testInput = document.querySelector(".test-input");
-const testDateInput = document.querySelector(".date-input");
+const testDateInput = document.getElementById("testDate");
+const vaccineDateInput = document.getElementById("dateVaccine");
+const bookingID = document.getElementById("bookingID");
+const bookingStatus = document.getElementById("bookingStatus");
+const bookingEdit = document.getElementById("testedit");
 const positiveResultInput = document.querySelector(".positiveResultInput");
 const negativeResultInput = document.querySelector(".negativeResultInput");
 const modal = document.getElementById("exampleModal");
@@ -55,19 +64,28 @@ searchInput.addEventListener("keyup", (e) => {
   });
   renderUsers(filteredUsers);
 });
+
+const findCpr = (userID)=>{
+ return users.find(user=>user.idUser==userID);
+}
 const renderTests = (tests) => {
   let HTML = "";
 
   tests.map((test, idx) => {
     HTML += `
     <tr>
-      <th scope="row">${idx + 1}</th>
-      <td class="item">${test.cpr_number}</td>
-      <td class="item">${test.test_place}</td>
-      <td class="item">${test.test_result}</td>
-      <td class="item">${test.test_time}</td>
+      <th scope="row">${test.idbookings}</th>
+      <td class="item">(${test.user_id_user})${findCpr(test.user_id_user).cprNumber}</td>
+      <td class="item">Covid center</td>
+      <td class="item">${test.bookingType_idbookingType.type}</td>
+      <td class="item">${test.bookingStatus_idbookingStatus.bookingStatus}</td>
+      <td class="item">${test.time}</td>
       <td align="center">
-    <button class="btn btn-secondary test-btn" onclick="">Update result</button>
+    <button class="btn btn-secondary test-btn" onclick="getBookingPopup('${JSON.stringify(
+        test
+    )
+        .split('"')
+        .join("&quot;")}')">Update result</button>
     </td>
     </tr>  
 `;
@@ -81,7 +99,7 @@ const renderUsers = (data) => {
   data.map((user, idx) => {
     HTML += `
     <tr>
-      <th scope="row">${idx + 1}</th>
+      <th scope="row">${user.idUser}</th>
       <td class="item">${user.name}</td>
       <td class="item">${user.surname}</td>
       <td class="item">${user.cprNumber}</td>
@@ -113,7 +131,7 @@ const renderUsers = (data) => {
   userTable.innerHTML = HTML;
 };
 
-testSaveBtn.addEventListener("click", () => {
+testSaveBtn.addEventListener("click", (e) => {
   let place = testInput.value;
   let date = testDateInput.value;
   let result = "";
@@ -125,15 +143,13 @@ testSaveBtn.addEventListener("click", () => {
     negativeResultInput.checked = false;
     result = positiveResultInput.value;
   }
-  console.log(result);
-  let cpr = personCPRTest.value;
+  let cpr = personIDTest.value;
   let data = {
     cprNumber: cpr,
     testPlace: place,
     testResult: result,
     testTime: date,
   };
-  console.log(data);
 
   fetch(covidTestUrl, {
     method: "POST",
@@ -146,6 +162,54 @@ testSaveBtn.addEventListener("click", () => {
   testTableContainer.style.opacity = "1";
 });
 
+
+EditTestBtn.addEventListener("click", (e) => {
+  let place = ""
+
+  let cpr = bookingID.value;
+  let result=bookingStatus.value;
+  let data = {
+    cprNumber: cpr,
+    testPlace: place,
+    testResult: result,
+    testTime: "date",
+  };
+
+  fetch(covidVaccineURl, {
+    method: "PUT",
+    body: JSON.stringify(data),
+  });
+  testPopup.classList.add("d-none");
+  tableContainer.style.pointerEvents = "auto";
+  tableContainer.style.opacity = "1";
+  testTableContainer.style.pointerEvents = "auto";
+  testTableContainer.style.opacity = "1";
+});
+
+vaccineSaveBtn.addEventListener("click", (e) => {
+  let date = vaccineDateInput.value;
+  let result = "";
+
+  let cpr = personIDVaccine.value;
+  let data = {
+    cprNumber: cpr,
+    testPlace: "asd",
+    testResult: "positive",
+    testTime: date,
+  };
+
+  fetch(covidVaccineURl, {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+  vaccinePopup.classList.add("d-none");
+  tableContainer.style.pointerEvents = "auto";
+  tableContainer.style.opacity = "1";
+  testTableContainer.style.pointerEvents = "auto";
+  testTableContainer.style.opacity = "1";
+  location.reload();
+});
+
 const getTestPopup = (user) => {
   console.log(JSON.parse(user));
   let userInfo = JSON.parse(user);
@@ -155,12 +219,44 @@ const getTestPopup = (user) => {
   testTableContainer.style.pointerEvents = "none";
   testTableContainer.style.opacity = "0.3";
   personName.innerHTML = userInfo.name + "" + userInfo.surname;
+  personIDTest.value = userInfo.idUser;
   personCPRTest.value = userInfo.cprNumber;
   personNameTest.value = userInfo.name + "" + userInfo.surname;
+};
+const getBookingPopup = (booking) => {
+  console.log(JSON.parse(booking));
+  let bookingInfo = JSON.parse(booking);
+  bookingEdit.classList.remove("d-none");
+  tableContainer.style.pointerEvents = "none";
+  tableContainer.style.opacity = "0.3";
+  testTableContainer.style.pointerEvents = "none";
+  testTableContainer.style.opacity = "0.3";
+  bookingID.value=bookingInfo.idbookings;
+  bookingStatus.value=bookingInfo.bookingStatus_idbookingStatus.idbookingStatus;
+};
+
+const getVaccinePopup = (user) => {
+  console.log(JSON.parse(user));
+  let userInfo = JSON.parse(user);
+  vaccinePopup.classList.remove("d-none");
+  tableContainer.style.pointerEvents = "none";
+  tableContainer.style.opacity = "0.3";
+  testTableContainer.style.pointerEvents = "none";
+  testTableContainer.style.opacity = "0.3";
+  personNameVaccine.innerHTML = userInfo.name + "" + userInfo.surname;
+  personIDVaccine.value = userInfo.idUser;
+  personCPRVaccine.innerHTML ="CPR:"+ userInfo.cprNumber;
 };
 
 closeTest.addEventListener("click", () => {
   testPopup.classList.add("d-none");
+  tableContainer.style.pointerEvents = "auto";
+  tableContainer.style.opacity = "1";
+  testTableContainer.style.pointerEvents = "auto";
+  testTableContainer.style.opacity = "1";
+});
+closeVaccine.addEventListener("click", () => {
+  vaccinePopup.classList.add("d-none");
   tableContainer.style.pointerEvents = "auto";
   tableContainer.style.opacity = "1";
   testTableContainer.style.pointerEvents = "auto";
@@ -182,5 +278,6 @@ function getCookie(cname) {
   }
   return "";
 }
-getTests();
-getUsers();
+getUsers().then(()=>{
+  getTests();
+});

@@ -9,7 +9,7 @@ body {
   display: flex;
   flex-direction: column;
 }
-.test-modal {
+.test-modal,vaccinepop  {
   /* display: none; */
   position: fixed;
   top: 50%;
