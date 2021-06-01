@@ -29,6 +29,21 @@ const positiveResultInput = document.querySelector(".positiveResultInput");
 const negativeResultInput = document.querySelector(".negativeResultInput");
 const modal = document.getElementById("exampleModal");
 const modalClass = document.querySelector(".modal");
+const back = document.getElementById("backButton");
+
+const getHref = () => {
+  const userid = getCookie("userID");
+  const userType = getCookie("userType");
+
+  if (userid > 0) {
+    if (userType === "administrator") {
+      back.href = "/admin";
+    }
+    if (userType === "secretary") {
+      back.href = "/secretary";
+    }
+  }
+};
 
 let users = [];
 
