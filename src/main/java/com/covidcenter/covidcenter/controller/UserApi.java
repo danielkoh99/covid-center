@@ -95,8 +95,10 @@ public class UserApi {
 
             } else {
                 return new ResponseEntity<>("Incorrect email or password", HttpStatus.NOT_FOUND);
+
             }
-        } catch (Exception e) {
+        }
+            catch (Exception e) {
             e.printStackTrace();
             validationErrors.add(new ValidationError("Exception", e.getMessage()));
             return new ResponseEntity<>(gson.toJson(validationErrors), HttpStatus.BAD_REQUEST);

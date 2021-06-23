@@ -25,7 +25,7 @@ public class BookingApi {
     IInternalService internalService;
 
     @GetMapping(APIPATH)
-    public String Booking(Model model,@RequestHeader HttpHeaders headers) {
+    public String Booking(@RequestHeader HttpHeaders headers) {
         Gson gson = new Gson();
         try {
             Integer user= Integer.valueOf(headers.getFirst("userID"));
